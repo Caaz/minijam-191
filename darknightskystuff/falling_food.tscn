@@ -1,31 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://vgjsfcgkpmx6"]
 
 [ext_resource type="ArrayMesh" uid="uid://j4smd1a2faag" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_steak.obj" id="1_dw6nb"]
-
-[sub_resource type="GDScript" id="GDScript_dw6nb"]
-script/source = "extends Node3D
-
-func _ready() -> void:
-	#var material = $FloorIndicator.get_active_material(0)
-	#$FloorIndicator.material_override = material
-	#$FloorIndicator.material_override.albedo_color.a = 0.1
-	#print($FloorIndicator.material_override.albedo_color)
-	pass
-
-
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	$Falling/Area3D.queue_free()
-	$FloorIndicator.queue_free()
-	pass # Replace with function body.
-"
+[ext_resource type="Script" uid="uid://c628tlyu1bjpb" path="res://darknightskystuff/falling_food.gd" id="1_wtf1y"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_dw6nb"]
 height = 0.801758
 radius = 0.335938
 
 [node name="FallingFood" type="Node3D"]
-script = SubResource("GDScript_dw6nb")
+script = ExtResource("1_wtf1y")
 
 [node name="Falling" type="RigidBody3D" parent="."]
 collision_layer = 0
