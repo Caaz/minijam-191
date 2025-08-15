@@ -5,6 +5,7 @@ var target_location: Vector3
 @export var speed: float = 10.0
 
 @onready var pickup_area: Area3D = get_node_or_null("PickupArea")
+signal food_captured(score:int)
 
 func _ready() -> void:
 	if pickup_area:
@@ -41,5 +42,5 @@ func _try_consume_food(node: Object) -> void:
 	# Only consume nodes that are explicitly in the "food" group to avoid false positives.
 	if food_root and food_root.is_in_group("food"):
 		food_root.queue_free()
-		emit_signal("food_captured", 1)
+		food_captured.emit(1)
 		print("Captured food!")

@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b02px5y2os0hw"]
+
+[ext_resource type="FontFile" uid="uid://br41v6ln12cdu" path="res://assets/Chocolate Cavalcade.otf" id="1_hkudd"]
+
+[resource]
+font = ExtResource("1_hkudd")
