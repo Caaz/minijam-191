@@ -12,3 +12,8 @@ func _ready():
 func start():
 	process_mode = Node.PROCESS_MODE_INHERIT
 	ui.show()
+
+func _process(delta: float) -> void:
+	var elapsed_seconds: int = snapped(game.elapsed_milliseconds, 0)
+	ui.time_label.text = "Time: %02d:%02d" % [floor(elapsed_seconds/60), (fmod(elapsed_seconds, 60))]
+	pass
