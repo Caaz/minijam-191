@@ -15,10 +15,6 @@ run/main_scene="uid://hnw3o8nv0dav"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Manager="*res://singletons/manager.gd"
-
 [display]
 
 window/stretch/mode="canvas_items"
@@ -27,6 +23,10 @@ window/stretch/aspect="keep_height"
 [global_group]
 
 crate=""
+
+[gui]
+
+theme/custom="uid://bjo6v8yf433ox"
 
 [rendering]
 

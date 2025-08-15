@@ -1,8 +1,9 @@
 class_name GameplayUI extends Control
 
+@export var prototype:Prototype
 @export var score_label:Label
 @export var time_label:Label
-@export var prototype:Prototype
+@export var buy_crate_button:Button
 
 func _ready() -> void:
 	print(prototype)

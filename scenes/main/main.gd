@@ -5,6 +5,7 @@ class_name Game extends Node
 
 func _ready() -> void:
 	main_menu.play_button.pressed.connect(func():
+		gameplay.start()
 		gameplay.process_mode = Node.PROCESS_MODE_INHERIT
 		main_menu.hide()
 	)

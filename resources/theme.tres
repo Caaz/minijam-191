@@ -50,3 +50,7 @@ Button/styles/normal = SubResource("StyleBoxTexture_aaf3v")
 Button/styles/pressed = SubResource("StyleBoxTexture_dhnw2")
 Label/font_sizes/font_size = 24
 Label/fonts/font = ExtResource("1_7ct1h")
+MarginContainer/constants/margin_bottom = 16
+MarginContainer/constants/margin_left = 16
+MarginContainer/constants/margin_right = 16
+MarginContainer/constants/margin_top = 16
