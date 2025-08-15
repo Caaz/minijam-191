@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://vgjsfcgkpmx6"]
+
+[ext_resource type="ArrayMesh" uid="uid://j4smd1a2faag" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_steak.obj" id="1_dw6nb"]
+
+[sub_resource type="GDScript" id="GDScript_dw6nb"]
+script/source = "extends Node3D
+
+func _ready() -> void:
+	#var material = $FloorIndicator.get_active_material(0)
+	#$FloorIndicator.material_override = material
+	#$FloorIndicator.material_override.albedo_color.a = 0.1
+	#print($FloorIndicator.material_override.albedo_color)
+	pass
+
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	$Falling/Area3D.queue_free()
+	$FloorIndicator.queue_free()
+	pass # Replace with function body.
+"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dw6nb"]
+height = 0.801758
+radius = 0.335938
+
+[node name="FallingFood" type="Node3D"]
+script = SubResource("GDScript_dw6nb")
+
+[node name="Falling" type="RigidBody3D" parent="."]
+collision_layer = 0
+
+[node name="Falling" type="MeshInstance3D" parent="Falling"]
+transform = Transform3D(0.356722, -0.934211, 0, 0.934211, 0.356722, 0, 0, 0, 1, 0, 11.2081, 0)
+mesh = ExtResource("1_dw6nb")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Falling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.2478, 0)
+shape = SubResource("CylinderShape3D_dw6nb")
+
+[node name="Area3D" type="Area3D" parent="Falling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.1714, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Falling/Area3D"]
+transform = Transform3D(1.40917, 0, 0, 0, 1.40917, 0, 0, 0, 1.40917, 0, 0.0763979, 0)
+shape = SubResource("CylinderShape3D_dw6nb")
+
+[node name="FloorIndicator" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_dw6nb")
+
+[connection signal="body_entered" from="Falling/Area3D" to="." method="_on_area_3d_body_entered"]

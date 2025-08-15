@@ -11,10 +11,17 @@ config_version=5
 [application]
 
 config/name="minijam-191"
+run/main_scene="uid://b1li7441tx38s"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_3d=2
+viewport/transparent_background=true
