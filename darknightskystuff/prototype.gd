@@ -7,6 +7,7 @@ signal striked_out()
 @export var crate_types: Dictionary[String, Mesh]
 @export var foods: Dictionary[String, Mesh]
 @export var crate_positions: Array[Vector3]
+@export var CrateScene:PackedScene
 var start_num_crates: int = 1
 
 var score:int = 0:
@@ -21,15 +22,9 @@ var current_crate: CharacterBody3D
 
 func _ready() -> void:
 	start_num_crates = clamp(start_num_crates, 0, crate_types.size())
-	var crate = preload("res://darknightskystuff/custom_crate.tscn").instantiate()
-	crate.position = crate_positions.pick_random()
-	crate.get_child(0).mesh = crate_types.values().pick_random()
-	crate.food_captured.connect(func(points:int):
-		score += points
-	)
+	add_crate()
 	striked.connect(func(num): print("Strike " + str(num)))
 	striked_out.connect(func(): print("Strike, you're out!"))
-	add_child(crate)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -95,5 +90,11 @@ func _on_spawner_timer_timeout() -> void:
 	falling_food.get_child(0).get_child(0).mesh = food
 	falling_food.get_child(1).mesh = food
 
-
-	pass # Replace with function body.
+func add_crate() -> void:
+	var crate = CrateScene.instantiate()
+	crate.position = crate_positions.pick_random()
+	crate.get_child(0).mesh = crate_types.values().pick_random()
+	crate.food_captured.connect(func(points:int):
+		score += points
+	)
+	add_child(crate)
