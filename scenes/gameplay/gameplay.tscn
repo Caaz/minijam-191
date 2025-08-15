@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs00widcsvkru"]
+
+[ext_resource type="PackedScene" uid="uid://b1li7441tx38s" path="res://darknightskystuff/prototype.tscn" id="1_x0t60"]
+[ext_resource type="PackedScene" uid="uid://ddc4jjhtow8bp" path="res://scenes/gameplay-ui/gameplay_ui.tscn" id="2_2p25t"]
+
+[node name="Gameplay" type="Node"]
+
+[node name="Prototype" parent="." instance=ExtResource("1_x0t60")]
+
+[node name="GameplayUI" parent="." instance=ExtResource("2_2p25t")]
