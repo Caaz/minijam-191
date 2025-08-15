@@ -1,28 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://1q31uayss818"]
+[gd_scene load_steps=5 format=3 uid="uid://1q31uayss818"]
 
+[ext_resource type="Script" uid="uid://c3nqwu3hijr36" path="res://darknightskystuff/custom_create.gd" id="1_anap1"]
 [ext_resource type="ArrayMesh" uid="uid://cu3y2b7wxlyq3" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate.obj" id="1_hihrs"]
-
-[sub_resource type="GDScript" id="GDScript_hihrs"]
-script/source = "extends CharacterBody3D
-
-var target_location: Vector3
-
-func _physics_process(delta: float) -> void:
-	if target_location:
-		if global_position.distance_to(target_location) > 0.1:
-			velocity = global_position.direction_to(target_location) * 10
-		else:
-			velocity = Vector3.ZERO
-	move_and_slide()
-	pass
-"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hihrs"]
 size = Vector3(2.03223, 0.824677, 2.00684)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_anap1"]
+
 [node name="CustomCrate" type="CharacterBody3D"]
 collision_layer = 257
-script = SubResource("GDScript_hihrs")
+script = ExtResource("1_anap1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_hihrs")
@@ -30,3 +18,12 @@ mesh = ExtResource("1_hihrs")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.410782, 0)
 shape = SubResource("BoxShape3D_hihrs")
+
+[node name="PickupArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.929638, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+transform = Transform3D(1.975, 0, 0, 0, 1.975, 0, 0, 0, 1.975, 0, 0.923861, 0)
+shape = SubResource("BoxShape3D_anap1")
+
+[connection signal="area_entered" from="PickupArea" to="." method="_on_pickup_area_area_entered"]
