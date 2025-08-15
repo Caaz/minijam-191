@@ -8,7 +8,7 @@ size = Vector3(2.03223, 0.824677, 2.00684)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_anap1"]
 
-[node name="CustomCrate" type="CharacterBody3D"]
+[node name="CustomCrate" type="CharacterBody3D" groups=["crate"]]
 collision_layer = 257
 script = ExtResource("1_anap1")
 
