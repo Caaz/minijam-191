@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://b1li7441tx38s"]
+[gd_scene load_steps=20 format=4 uid="uid://b1li7441tx38s"]
 
 [ext_resource type="ArrayMesh" uid="uid://dcyec5boov7uv" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate_potatoes.obj" id="1_g4rgl"]
 [ext_resource type="Environment" uid="uid://bfh08x2qquc5i" path="res://darknightskystuff/assets/env.tres" id="1_ow16m"]
@@ -10,7 +10,6 @@
 [ext_resource type="ArrayMesh" uid="uid://b37rstv45qg58" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate_steak.obj" id="5_g4rgl"]
 [ext_resource type="ArrayMesh" uid="uid://j4smd1a2faag" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_steak.obj" id="6_yukdf"]
 [ext_resource type="PackedScene" uid="uid://1q31uayss818" path="res://darknightskystuff/custom_crate.tscn" id="8_qrdet"]
-[ext_resource type="PackedScene" uid="uid://vgjsfcgkpmx6" path="res://darknightskystuff/falling_food.tscn" id="10_ly37e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa35d"]
 resource_name = "restaurant"
@@ -83,22 +82,6 @@ albedo_color = Color(0.422158, 0.683938, 0.997285, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_qn3sg"]
 size = Vector3(37.4434, 0.0566406, 30.1191)
 
-[sub_resource type="GDScript" id="GDScript_dw6nb"]
-script/source = "extends Node3D
-
-func _ready() -> void:
-	#var material = $FloorIndicator.get_active_material(0)
-	#$FloorIndicator.material_override = material
-	#$FloorIndicator.material_override.albedo_color.a = 0.1
-	#print($FloorIndicator.material_override.albedo_color)
-	pass
-
-
-func _on_area_3d_body_entered(body: Node3D) -> void:
-	queue_free()
-	pass # Replace with function body.
-"
-
 [node name="Prototype" type="Node3D"]
 script = ExtResource("1_qn3sg")
 crate_types = Dictionary[String, Mesh]({
@@ -148,9 +131,5 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47168, 0)
 shape = SubResource("BoxShape3D_qn3sg")
-
-[node name="FallingFood" parent="." instance=ExtResource("10_ly37e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.408733, 2.53722, 0.717284)
-script = SubResource("GDScript_dw6nb")
 
 [connection signal="timeout" from="SpawnerTimer" to="." method="_on_spawner_timer_timeout"]

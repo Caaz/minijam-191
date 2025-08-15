@@ -32,7 +32,7 @@ func _try_consume_food(node: Object) -> void:
 	
 	if node == null:
 		return
-
+	
 	var food_root: Node = null
 
 	# If we touched an Area3D on the food, its parents parent is likely the food root
