@@ -13,10 +13,8 @@ func _ready() -> void:
 	pass
 
 
-
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	$Falling/Area3D.queue_free()
-	$FloorIndicator.queue_free()
+	queue_free()
 	pass # Replace with function body.
 "
 
@@ -28,10 +26,13 @@ radius = 0.335938
 script = SubResource("GDScript_dw6nb")
 
 [node name="Falling" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.8772, 0)
 collision_layer = 0
+gravity_scale = 0.3
 
 [node name="Falling" type="MeshInstance3D" parent="Falling"]
 transform = Transform3D(0.356722, -0.934211, 0, 0.934211, 0.356722, 0, 0, 0, 1, 0, 11.2081, 0)
+cast_shadow = 0
 mesh = ExtResource("1_dw6nb")
 skeleton = NodePath("../..")
 
