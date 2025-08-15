@@ -24,6 +24,10 @@ Manager="*res://singletons/manager.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
 [global_group]
 
 crate=""

@@ -1,6 +1,8 @@
 class_name Prototype extends Node3D
 
 signal score_changed(score:int)
+signal striked(current_strikes:int)
+signal striked_out()
 
 @export var crate_types: Dictionary[String, Mesh]
 @export var foods: Dictionary[String, Mesh]
@@ -12,6 +14,9 @@ var score:int = 0:
 		score = new_score
 		score_changed.emit(score)
 
+var strikes: int = 0
+var max_strikes: int = 5
+
 var current_crate: CharacterBody3D
 
 func _ready() -> void:
@@ -22,12 +27,23 @@ func _ready() -> void:
 	crate.food_captured.connect(func(points:int):
 		score += points
 	)
+	striked.connect(func(num): print("Strike " + str(num)))
+	striked_out.connect(func(): print("Strike, you're out!"))
 	add_child(crate)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:
 			shoot_ray()
+			
+func strike():
+	if strikes < max_strikes:
+		strikes+=1
+		if strikes < max_strikes:
+			striked.emit(strikes)
+		elif strikes == max_strikes:
+			striked.emit(strikes)
+			striked_out.emit()
 
 func shoot_ray():
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -54,6 +70,9 @@ func shoot_ray():
 
 func _on_spawner_timer_timeout() -> void:
 	var falling_food := preload("res://darknightskystuff/falling_food.tscn").instantiate()
+	falling_food.hit_the_ground.connect(func():
+		strike()
+		)
 
 	var cshape: CollisionShape3D = $Area3D/CollisionShape3D
 	var box: BoxShape3D = cshape.shape
