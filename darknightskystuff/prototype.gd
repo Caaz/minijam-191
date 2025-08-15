@@ -10,6 +10,8 @@ signal striked_out()
 @export var CrateScene:PackedScene
 var start_num_crates: int = 1
 
+var elapsed_milliseconds: float = 0
+
 var score:int = 0:
 	set(new_score):
 		score = new_score
@@ -26,11 +28,14 @@ func _ready() -> void:
 	striked.connect(func(num): print("Strike " + str(num)))
 	striked_out.connect(func(): print("Strike, you're out!"))
 
+func _process(delta: float) -> void:
+	elapsed_milliseconds += delta
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed:
 			shoot_ray()
-			
+
 func strike():
 	if strikes < max_strikes:
 		strikes+=1
