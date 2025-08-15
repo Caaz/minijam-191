@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://b1li7441tx38s"]
+[gd_scene load_steps=22 format=4 uid="uid://b1li7441tx38s"]
 
 [ext_resource type="ArrayMesh" uid="uid://dcyec5boov7uv" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate_potatoes.obj" id="1_g4rgl"]
 [ext_resource type="Environment" uid="uid://bfh08x2qquc5i" path="res://darknightskystuff/assets/env.tres" id="1_ow16m"]
@@ -9,6 +9,7 @@
 [ext_resource type="ArrayMesh" uid="uid://d4lcnbdk758lc" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_potato.obj" id="4_4078c"]
 [ext_resource type="ArrayMesh" uid="uid://b37rstv45qg58" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate_steak.obj" id="5_g4rgl"]
 [ext_resource type="ArrayMesh" uid="uid://j4smd1a2faag" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_steak.obj" id="6_yukdf"]
+[ext_resource type="PackedScene" uid="uid://1q31uayss818" path="res://darknightskystuff/custom_crate.tscn" id="8_qrdet"]
 [ext_resource type="PackedScene" uid="uid://vgjsfcgkpmx6" path="res://darknightskystuff/falling_food.tscn" id="10_ly37e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa35d"]
@@ -111,6 +112,7 @@ foods = Dictionary[String, Mesh]({
 "Tomatoes": ExtResource("2_yukdf")
 })
 crate_positions = Array[Vector3]([Vector3(10.8872, 2.5, 12.7412)])
+CrateScene = ExtResource("8_qrdet")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_ow16m")
