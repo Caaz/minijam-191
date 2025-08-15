@@ -32,6 +32,11 @@ crate=""
 
 theme/custom="uid://bjo6v8yf433ox"
 
+[layer_names]
+
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Crate"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

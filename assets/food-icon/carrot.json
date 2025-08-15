@@ -1,0 +1,12 @@
+{
+	"animation_details": [],
+	"animation_fps": 30,
+	"diffuse_path": "C:/Users/DCaaz/Projects/godot/minijam-191/assets/food-icon/carrot.png",
+	"frame_resolution": {
+		"x": 256,
+		"y": 256
+	},
+	"hframes": 1,
+	"total_frames": 1,
+	"vframes": 1
+}
