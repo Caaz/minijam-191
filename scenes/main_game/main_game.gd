@@ -29,6 +29,7 @@ var strikes: int = 0:
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
 	ui.hide()
+	ui.buy_crate_button.pressed.connect(add_crate)
 
 func start() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT

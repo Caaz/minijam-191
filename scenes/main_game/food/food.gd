@@ -20,7 +20,7 @@ func _place_sprite() -> void:
 	sprite.pixel_size = .005
 	add_child(sprite)
 
-func _physics_process(delta):
+func _physics_process(_delta) -> void:
 	var bodies:Array[Node3D] = get_colliding_bodies()
 	if bodies.size() > 0:
 		if bodies[0].is_in_group(&"floor"):
