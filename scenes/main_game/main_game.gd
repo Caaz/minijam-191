@@ -29,6 +29,8 @@ var score:int = 0:
 
 var strikes: int = 0:
 	set(new_strikes):
+		if new_strikes > strikes:
+			$BadSound.play()
 		strikes = new_strikes
 		strikes_changed.emit(strikes)
 		if strikes >= MAX_STRIKES:
@@ -68,8 +70,11 @@ func add_crate() -> void:
 	crate.caught.connect(_on_food_caught)
 
 func _on_food_caught(food:Food):
-	score += food.type.points
-	$GoodSound.play()
+	if food.type.points > 0:
+		score += food.type.points
+		$GoodSound.play()
+	else:
+		strikes+=1
 
 func _on_crate_selected(crate:Crate):
 	print("crate selected ", crate)

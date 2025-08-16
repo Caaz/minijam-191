@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="FoodType" load_steps=4 format=3 uid="uid://cd2jh7gfitxnk"]
+
+[ext_resource type="Script" path="res://resources/food_type.gd" id="1_7sipj"]
+[ext_resource type="Texture2D" uid="uid://brd8ihkfcbgfo" path="res://assets/food-icon/bomb.png" id="1_lim4n"]
+[ext_resource type="ArrayMesh" uid="uid://0pqay7iwcxbw" path="res://assets/Ultimate Platformer Pack - Dec 2021/Level and Mechanics/OBJ/Bomb.obj" id="2_tc63m"]
+
+[resource]
+script = ExtResource("1_7sipj")
+mesh = ExtResource("2_tc63m")
+icon = ExtResource("1_lim4n")
+name = "Bomb"
+points = -1
+fall_speed = 1.0

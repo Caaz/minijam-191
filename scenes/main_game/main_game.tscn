@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://chihdjvv7b61o" path="res://scenes/main_game/food/food.tscn" id="6_b4n6q"]
 [ext_resource type="Resource" uid="uid://cc273nes4gott" path="res://resources/food_types.tres" id="7_gl27v"]
 [ext_resource type="Script" uid="uid://dq78jf56cvepu" path="res://scenes/main_game/ground_spawner.gd" id="8_mijjq"]
-[ext_resource type="Script" path="res://scenes/main_game/stage_manager.gd" id="10_r81kp"]
+[ext_resource type="Script" uid="uid://d1utporjrye2o" path="res://scenes/main_game/stage_manager.gd" id="10_r81kp"]
 [ext_resource type="AudioStream" uid="uid://b4fuqwnm4uuoe" path="res://assets/sounds/MUS_Easy.ogg" id="11_fetp2"]
 [ext_resource type="AudioStream" uid="uid://co876i8dkuh8p" path="res://assets/sounds/SFX_UI_Affirmative.ogg" id="12_b4n6q"]
 [ext_resource type="AudioStream" uid="uid://m1wdxcf5par2" path="res://assets/sounds/SFX_UI_Negative.ogg" id="13_gl27v"]

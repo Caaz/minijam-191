@@ -7,5 +7,5 @@ script = ExtResource("1_fb2v3")
 base_folder = "res://resources/food_types"
 includes = Array[String]([])
 excludes = Array[String]([])
-paths = Array[String](["res://resources/food_types/carrot.tres", "res://resources/food_types/potato.tres", "res://resources/food_types/steak.tres", "res://resources/food_types/tomato.tres"])
+paths = Array[String](["res://resources/food_types/bomb.tres", "res://resources/food_types/carrot.tres", "res://resources/food_types/potato.tres", "res://resources/food_types/steak.tres", "res://resources/food_types/tomato.tres"])
 metadata/_custom_type_script = "uid://hsivr6oymotw"
