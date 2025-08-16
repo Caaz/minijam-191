@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FoodType" load_steps=4 format=3 uid="uid://cwf6mhddd2nn6"]
+
+[ext_resource type="Texture2D" uid="uid://imbfmdiekmqh" path="res://assets/food-icon/carrot.png" id="1_54gyy"]
+[ext_resource type="ArrayMesh" uid="uid://dfytr8vymlldx" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_carrot.obj" id="1_gx8dv"]
+[ext_resource type="Script" uid="uid://l6skux8jjlap" path="res://resources/food_type.gd" id="1_v1ord"]
+
+[resource]
+script = ExtResource("1_v1ord")
+mesh = ExtResource("1_gx8dv")
+icon = ExtResource("1_54gyy")
+name = "Carrot"
+points = 1
+fall_speed = 1.0
+metadata/_custom_type_script = "uid://l6skux8jjlap"
