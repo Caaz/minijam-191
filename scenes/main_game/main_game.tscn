@@ -88,16 +88,18 @@ size = Vector3(30, 10, 30)
 [sub_resource type="BoxShape3D" id="BoxShape3D_i3kwu"]
 size = Vector3(29.9883, 0.001, 30.1721)
 
-[node name="MainGame" type="Node3D" node_paths=PackedStringArray("camera", "click_raycast", "ui", "ground_spawner", "custom_grid_map")]
+[node name="MainGame" type="Node3D" node_paths=PackedStringArray("camera", "click_raycast", "click_raycast_crates", "ui", "ground_spawner", "custom_grid_map")]
 script = ExtResource("1_i3kwu")
 CrateScene = ExtResource("2_mijjq")
 camera = NodePath("Camera3D")
 click_raycast = NodePath("ClickRayCast")
+click_raycast_crates = NodePath("ClickRayCastCrates")
 ui = NodePath("GameplayUI")
 ground_spawner = NodePath("GroundSpawner")
 custom_grid_map = NodePath("GridMap")
 
 [node name="GameplayUI" parent="." node_paths=PackedStringArray("game") instance=ExtResource("3_ldk84")]
+process_mode = 3
 game = NodePath("..")
 
 [node name="GridMap" type="GridMap" parent="." groups=["floor"]]
@@ -144,6 +146,13 @@ transform = Transform3D(-1, -1.36933e-14, 8.74228e-08, 7.80852e-08, 0.449678, 0.
 [node name="ClickRayCast" type="RayCast3D" parent="."]
 top_level = true
 enabled = false
+
+[node name="ClickRayCastCrates" type="RayCast3D" parent="."]
+top_level = true
+enabled = false
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="GroundSpawner" type="Area3D" parent="." node_paths=PackedStringArray("spawn_area")]
 collision_layer = 0

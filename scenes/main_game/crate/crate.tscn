@@ -53,3 +53,12 @@ input_ray_pickable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CatchingArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.457589, 0)
 shape = SubResource("BoxShape3D_o135h")
+
+[node name="PausedSelectionArea" type="Area3D" parent="."]
+process_mode = 3
+collision_layer = 4
+input_ray_pickable = false
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="PausedSelectionArea"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_j1jke")

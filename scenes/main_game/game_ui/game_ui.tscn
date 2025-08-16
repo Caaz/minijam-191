@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddc4jjhtow8bp"]
+[gd_scene load_steps=7 format=3 uid="uid://ddc4jjhtow8bp"]
 
 [ext_resource type="Script" uid="uid://p0c0chjrgtc1" path="res://scenes/main_game/game_ui/game_ui.gd" id="1_p5s7u"]
 [ext_resource type="LabelSettings" uid="uid://b02px5y2os0hw" path="res://resources/default_labelsettings.tres" id="2_p5s7u"]
 [ext_resource type="Texture2D" uid="uid://csy36q0u3n6w7" path="res://assets/kenney-ui-pack/Vector/Red/icon_outline_cross.svg" id="3_6i820"]
 [ext_resource type="Texture2D" uid="uid://cb12k4q82kx88" path="res://assets/crate.png" id="3_avg3y"]
+[ext_resource type="Texture2D" uid="uid://7i6asgwo87bo" path="res://assets/ui-icons/plus/plus-symbol-button.png" id="5_hcj8c"]
+[ext_resource type="Texture2D" uid="uid://7s5q83132wn5" path="res://assets/ui-icons/speed/lightning.png" id="6_jgttn"]
 
-[node name="GameplayUI" type="Control" node_paths=PackedStringArray("score_label", "time_label", "stage_label", "buy_crate_button", "strike_container")]
+[node name="GameplayUI" type="Control" node_paths=PackedStringArray("score_label", "time_label", "stage_label", "buy_crate_button", "upgrade_crate_speed_button", "strike_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,6 +20,7 @@ score_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxCon
 time_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/TimeLabel")
 stage_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/VBoxContainer/StageLabel")
 buy_crate_button = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/BuyCrate")
+upgrade_crate_speed_button = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/UpgradeCrateSpeed")
 strike_container = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/VBoxContainer/StrikeContainer")
 strike_texture = ExtResource("3_6i820")
 
@@ -71,10 +74,25 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="BoxContainer2" type="BoxContainer" parent="AspectRatioContainer/MarginContainer/BoxContainer"]
+[node name="BoxContainer2" type="VSplitContainer" parent="AspectRatioContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="BuyCrate" type="Button" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2"]
 layout_mode = 2
-text = " Buy Crate"
 icon = ExtResource("3_avg3y")
+
+[node name="Plus-symbol-button" type="Sprite2D" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/BuyCrate"]
+modulate = Color(0.827321, 0.272025, 0.460449, 1)
+position = Vector2(52, 10.996)
+scale = Vector2(0.026001, 0.026001)
+texture = ExtResource("5_hcj8c")
+
+[node name="UpgradeCrateSpeed" type="Button" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2"]
+layout_mode = 2
+icon = ExtResource("3_avg3y")
+
+[node name="Lightning" type="Sprite2D" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/UpgradeCrateSpeed"]
+position = Vector2(53, 12.996)
+scale = Vector2(0.0351563, 0.0351563)
+texture = ExtResource("6_jgttn")

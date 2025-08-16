@@ -5,6 +5,7 @@ class_name GameplayUI extends Control
 @export var time_label:Label
 @export var stage_label:Label
 @export var buy_crate_button:Button
+@export var upgrade_crate_speed_button: Button
 @export var strike_container:Control
 @export var strike_texture:Texture2D
 
@@ -36,3 +37,26 @@ func add_strike_display():
 func _on_stage_manager_stage_changed(_new_stage: int, description: String) -> void:
 	stage_label.visible = true
 	stage_label.text = description
+
+func _input(event: InputEvent) -> void:
+	if game.current_upgrade_mode == GlobalData.CrateUpgrade.NONE:
+		return
+	if event is InputEventMouseButton:
+		if event.pressed:
+			game.click_raycast_crates.position = game.camera.project_ray_origin(event.position)
+			game.click_raycast_crates.target_position = game.camera.project_ray_normal(event.position) * 100
+			game.click_raycast_crates.force_raycast_update()
+			if not game.click_raycast_crates.is_colliding():
+				game.process_mode = Node.PROCESS_MODE_INHERIT
+				return
+				
+			var collider = game.click_raycast_crates.get_collider()
+			if collider is Area3D:
+				var crate: Crate = collider.get_parent()
+				var upgrade_cost = crate.get_upgrade_cost(game.current_upgrade_mode)
+				if upgrade_cost <= game.score:
+					crate.upgrade(game.current_upgrade_mode)
+					game.score -= upgrade_cost
+					game.process_mode = Node.PROCESS_MODE_INHERIT
+	pass
+	

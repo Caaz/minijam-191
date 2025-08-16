@@ -29,6 +29,10 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 config/defaults/default_environment=""
 
+[autoload]
+
+GlobalData="*res://scenes/global_data.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"
