@@ -13,6 +13,8 @@ const MAX_STRIKES:int = 3
 @export var ui:GameplayUI
 @export var ground_spawner: GroundSpawner
 
+@export var custom_grid_map: CustomGridMap
+
 ## Current selected crate
 var selected_crate:Crate
 
@@ -36,6 +38,7 @@ var elapsed_seconds: float = 0:
 			seconds_changed.emit(elapsed_seconds)
 
 func _ready() -> void:
+	custom_grid_map.create_square(Vector3i(0,0,0), 8)
 	process_mode = Node.PROCESS_MODE_DISABLED
 	ui.hide()
 	ui.buy_crate_button.pressed.connect(add_crate)
