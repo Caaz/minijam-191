@@ -20,7 +20,11 @@ func _ready() -> void:
 func add_crate() -> void:
 	var crate:Crate = CrateScene.instantiate() as Crate
 	crate.selected.connect(_on_crate_selected.bind(crate))
+	crate.caught.connect(_on_food_caught)
 	add_child(crate)
+
+func _on_food_caught(food:Food):
+	score += food.type.points
 
 func _on_crate_selected(crate:Crate):
 	print("crate selected ", crate)
@@ -42,11 +46,13 @@ func _input(event:InputEvent):
 		selected_crate = null
 		return
 
+	if not selected_crate.path:
+		return
+		
 	var mouse_event:InputEventMouseMotion = event as InputEventMouseMotion
 	if not mouse_event:
 		return
 	
-		
 	click_raycast.position = camera.project_ray_origin(mouse_event.position)
 	click_raycast.target_position = camera.project_ray_normal(mouse_event.position) * 100
 	click_raycast.force_raycast_update()

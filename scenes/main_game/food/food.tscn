@@ -8,7 +8,7 @@ bounce = 0.25
 [sub_resource type="SphereShape3D" id="SphereShape3D_o4lbg"]
 
 [node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape")]
-collision_layer = 4
+collision_layer = 6
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_jvm58")
 contact_monitor = true

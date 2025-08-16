@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bl8moy187rtp4"]
+[gd_scene load_steps=8 format=3 uid="uid://bl8moy187rtp4"]
 
 [ext_resource type="Script" uid="uid://cyrv6psms2wge" path="res://scenes/main_game/crate/crate.gd" id="1_j1jke"]
 [ext_resource type="ArrayMesh" uid="uid://cu3y2b7wxlyq3" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate.obj" id="1_jpei4"]
@@ -6,18 +6,27 @@
 [ext_resource type="Texture2D" uid="uid://dei2e7m58npy8" path="res://assets/kenney-ui-pack/Vector/Grey/icon_outline_square.svg" id="3_3v208"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_chisc"]
+absorbent = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j1jke"]
 points = PackedVector3Array(-0.97077, 0.00252741, -0.97077, 0.975233, 0.792946, 0.975258, -0.975258, 0.792946, 0.975258, -0.975258, 0.792946, -0.975258, 0.975233, 0.792946, -0.975258, 0.970746, 0.00252741, 0.97077, -0.97077, 0.00252741, 0.97077, 0.970746, 0.00252741, -0.97077)
 
-[node name="Crate" type="RigidBody3D" node_paths=PackedStringArray("selection_ui", "pid") groups=["crate"]]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o135h"]
+size = Vector3(1.5, 0.684082, 1.5)
+
+[node name="Crate" type="RigidBody3D" node_paths=PackedStringArray("selection_ui", "catching_area") groups=["crate"]]
 collision_layer = 2
 collision_mask = 3
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_chisc")
+linear_damp = 100.0
 script = ExtResource("1_j1jke")
 PathScene = ExtResource("2_chisc")
 selection_ui = NodePath("SelectionUI")
-pid = NodePath("PIDController")
+catching_area = NodePath("CatchingArea")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -36,13 +45,11 @@ pixel_size = 0.004
 shaded = true
 texture = ExtResource("3_3v208")
 
-[node name="PIDController" type="PIDController" parent="."]
-controlled_node = NodePath("..")
-controlled_property = &"position"
-target = Vector3(0, 0, 0)
-p_gain = Vector3(64, 64, 64)
-i_gain = Vector3(32, 32, 32)
-d_gain = Vector3(50, 50, 50)
-prevent_overshoot = true
-control_output_limit = Vector3(10, 10, 10)
-error_accumulation_limit = Vector3(10, 10, 10)
+[node name="CatchingArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CatchingArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.457589, 0)
+shape = SubResource("BoxShape3D_o135h")
