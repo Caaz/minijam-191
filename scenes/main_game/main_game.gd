@@ -1,22 +1,40 @@
 class_name MainGame extends Node3D
 signal score_changed(score:int)
+signal strikes_changed(strike:int)
+signal game_over()
+
+const MAX_STRIKES:int = 3
 
 @export var CrateScene:PackedScene
 @export var camera:Camera3D
 ## This node handles raycasts for clicks, because I don't want to bother with managing all the raycast code for doing this manually.
 @export var click_raycast:RayCast3D
+@export var ui:GameplayUI
 
 ## Current selected crate
 var selected_crate:Crate
 
-var score:int:
+var score:int = 0:
 	set(new_score):
 		score = new_score
 		score_changed.emit(score)
 
-func _ready() -> void:
-	add_crate()
+var strikes: int = 0:
+	set(new_strikes):
+		strikes = new_strikes
+		strikes_changed.emit(strikes)
+		if strikes >= MAX_STRIKES:
+			game_over.emit()
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_DISABLED
+	ui.hide()
+
+func start() -> void:
+	process_mode = Node.PROCESS_MODE_INHERIT
+	add_crate()
+	ui.show()
+	
 func add_crate() -> void:
 	var crate:Crate = CrateScene.instantiate() as Crate
 	crate.selected.connect(_on_crate_selected.bind(crate))
@@ -30,11 +48,6 @@ func _on_crate_selected(crate:Crate):
 	print("crate selected ", crate)
 	selected_crate = crate
 	selected_crate.new_path()
-	# Probably don't even need to do this with the new method, but just in case it's here...
-	#for crate_node in get_tree().get_nodes_in_group(&'crate'):
-		#if crate_node == crate:
-			#continue
-		#crate_node.selected = false
 
 func _input(event:InputEvent):
 	

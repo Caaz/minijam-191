@@ -3,7 +3,7 @@ extends Area3D
 
 @export var spawn_area:CollisionShape3D
 @export var spawn_timer:Timer
-
+@export var game:MainGame
 @export var food_type_group:ResourceGroup
 var food_types:Array[FoodType]
 
@@ -15,6 +15,9 @@ func _spawn_food() -> void:
 	var food:Food = FoodScene.instantiate() as Food
 	food.type = food_types.pick_random()
 	food.position = _get_spawnpoint()
+	food.hit_floor.connect(func():
+		game.strikes += 1
+	)
 	add_child(food)
 	
 func _get_spawnpoint() -> Vector3:

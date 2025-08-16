@@ -78,11 +78,12 @@ friction = 0.5
 [sub_resource type="BoxShape3D" id="BoxShape3D_7wsgf"]
 size = Vector3(30, 10, 30)
 
-[node name="MainGame" type="Node3D" node_paths=PackedStringArray("camera", "click_raycast")]
+[node name="MainGame" type="Node3D" node_paths=PackedStringArray("camera", "click_raycast", "ui")]
 script = ExtResource("1_i3kwu")
 CrateScene = ExtResource("2_mijjq")
 camera = NodePath("Camera3D")
 click_raycast = NodePath("ClickRayCast")
+ui = NodePath("GameplayUI")
 
 [node name="GameplayUI" parent="." node_paths=PackedStringArray("game") instance=ExtResource("3_ldk84")]
 game = NodePath("..")
@@ -106,7 +107,7 @@ shadow_blur = 0.0
 directional_shadow_fade_start = 0.511
 directional_shadow_max_distance = 60.2
 
-[node name="FoodSpawner" type="Area3D" parent="." node_paths=PackedStringArray("spawn_area", "spawn_timer")]
+[node name="FoodSpawner" type="Area3D" parent="." node_paths=PackedStringArray("spawn_area", "spawn_timer", "game")]
 collision_layer = 0
 collision_mask = 0
 monitoring = false
@@ -115,6 +116,7 @@ script = ExtResource("5_fetp2")
 FoodScene = ExtResource("6_b4n6q")
 spawn_area = NodePath("CollisionShape3D")
 spawn_timer = NodePath("Timer")
+game = NodePath("..")
 food_type_group = ExtResource("7_gl27v")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FoodSpawner"]

@@ -67,7 +67,7 @@ func _on_spawner_timer_timeout() -> void:
 	var falling_food := preload("res://darknightskystuff/falling_food.tscn").instantiate()
 	falling_food.hit_the_ground.connect(func():
 		strike()
-		)
+	)
 
 	var cshape: CollisionShape3D = $Area3D/CollisionShape3D
 	var box: BoxShape3D = cshape.shape

@@ -1,4 +1,6 @@
 class_name Food extends RigidBody3D
+signal hit_floor()
+
 @export var type:FoodType
 @export var mesh_instance:MeshInstance3D
 @export var collision_shape:CollisionShape3D
@@ -22,4 +24,5 @@ func _physics_process(delta):
 	var bodies:Array[Node3D] = get_colliding_bodies()
 	if bodies.size() > 0:
 		if bodies[0].is_in_group(&"floor"):
+			hit_floor.emit()
 			queue_free()

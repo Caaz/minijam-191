@@ -15,7 +15,7 @@ func _ready():
 func add_point(point:Vector3, force:bool=false, min_distance:float=tesselation_resolution):
 	if not force and len(points) > 0 and points[-1].distance_to(point) < min_distance:
 		return
-	print("Adding point ",point)
+
 	points.append(point)
 	curve.add_point(point)
 	if points.size() > 1:

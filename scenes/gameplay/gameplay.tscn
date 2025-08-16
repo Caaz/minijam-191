@@ -11,6 +11,4 @@ game = NodePath("Prototype")
 
 [node name="Prototype" parent="." instance=ExtResource("1_x0t60")]
 
-[node name="GameplayUI" parent="." node_paths=PackedStringArray("prototype") instance=ExtResource("2_2p25t")]
-mouse_filter = 2
-prototype = NodePath("../Prototype")
+[node name="GameplayUI" parent="." instance=ExtResource("2_2p25t")]

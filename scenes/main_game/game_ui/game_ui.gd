@@ -4,8 +4,26 @@ class_name GameplayUI extends Control
 @export var score_label:Label
 @export var time_label:Label
 @export var buy_crate_button:Button
+@export var strike_container:Control
+@export var strike_texture:Texture2D
 
 func _ready() -> void:
 	game.score_changed.connect(func(new_score:int):
 		score_label.text = "Score: %05d" % new_score
 	)
+	
+	for i:int in range(0, game.MAX_STRIKES):
+		add_strike_display()
+		
+	game.strikes_changed.connect(func(strike_count:int):
+		var strike:Node = strike_container.get_child(strike_count - 1)
+		if not strike:
+			return
+		strike.show()
+	)
+
+func add_strike_display():
+	var strike = TextureRect.new()
+	strike.texture = strike_texture
+	strike.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+	strike_container.add_child(strike)
