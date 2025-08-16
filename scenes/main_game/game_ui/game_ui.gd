@@ -21,6 +21,9 @@ func _ready() -> void:
 			return
 		strike.show()
 	)
+	game.seconds_changed.connect(func(seconds:float):
+		time_label.text = "Time: %02d:%02d" % [floor(seconds/60), (fmod(seconds, 60))]
+	)
 
 func add_strike_display():
 	var strike = TextureRect.new()

@@ -1,6 +1,7 @@
 class_name MainGame extends Node3D
 signal score_changed(score:int)
 signal strikes_changed(strike:int)
+signal seconds_changed(seconds:int)
 signal game_over()
 
 const MAX_STRIKES:int = 3
@@ -26,11 +27,21 @@ var strikes: int = 0:
 		if strikes >= MAX_STRIKES:
 			game_over.emit()
 
+var _seconds:int = 0
+var elapsed_seconds: float = 0:
+	set(new_seconds):
+		elapsed_seconds = new_seconds
+		if _seconds != floor(elapsed_seconds):
+			seconds_changed.emit(elapsed_seconds)
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
 	ui.hide()
 	ui.buy_crate_button.pressed.connect(add_crate)
 
+func _process(delta:float) -> void:
+	elapsed_seconds += delta
+	
 func start() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
 	add_crate()
