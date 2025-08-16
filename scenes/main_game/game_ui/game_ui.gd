@@ -17,7 +17,8 @@ func _ready() -> void:
 		add_strike_display()
 		
 	game.strikes_changed.connect(func(strike_count:int):
-		var strike:Node = strike_container.get_child(strike_count - 1)
+		print(strike_count)
+		var strike:Node = strike_container.get_child(strike_count)
 		if not strike:
 			return
 		strike.visible = true
@@ -35,7 +36,6 @@ func add_strike_display():
 	
 
 
-func _on_stage_manager_stage_changed(new_stage: int, description: String) -> void:
+func _on_stage_manager_stage_changed(_new_stage: int, description: String) -> void:
 	stage_label.visible = true
 	stage_label.text = description
-	pass # Replace with function body.

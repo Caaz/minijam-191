@@ -26,6 +26,7 @@ var score:int = 0:
 var strikes: int = 0:
 	set(new_strikes):
 		strikes = new_strikes
+		print("strikes: ",strikes)
 		strikes_changed.emit(strikes)
 		if strikes >= MAX_STRIKES:
 			game_over.emit()
