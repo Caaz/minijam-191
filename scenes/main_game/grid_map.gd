@@ -27,10 +27,11 @@ func create_square(center: Vector3i, size: int) -> void:
 	square_cells.clear()
 
 	# Calculate half size for positioning
-	var half_size = size / 2
+	@warning_ignore("integer_division")
+	var half_size:int = size / 2
 
 	# Fill the square from inside out using a spiral/ring approach
-	for ring in range(half_size + 1):
+	for ring:int in range(half_size + 1):
 		fill_ring(center, ring)
 
 # Fills a ring at the specified distance from center
@@ -42,18 +43,19 @@ func fill_ring(center: Vector3i, ring_distance: int) -> void:
 		square_cells[pos] = true
 		return
 
-	var half_size = current_square_size / 2
+	@warning_ignore("integer_division")
+	var half_size:int = current_square_size / 2
 
 	# Calculate ring bounds
-	var min_x = center.x - ring_distance
-	var max_x = center.x + ring_distance
-	var min_z = center.z - ring_distance
-	var max_z = center.z + ring_distance
+	var min_x:int = center.x - ring_distance
+	var max_x:int = center.x + ring_distance
+	var min_z:int = center.z - ring_distance
+	var max_z:int = center.z + ring_distance
 
 	# Only fill cells that are within the square bounds
-	var square_min_x = center.x - half_size
-	var square_max_x = center.x + half_size
-	var square_min_z = center.z - half_size
+	var square_min_x:int = center.x - half_size
+	var square_max_x:int = center.x + half_size
+	var square_min_z:int = center.z - half_size
 	var square_max_z = center.z + half_size
 
 	# Fill the ring
@@ -83,7 +85,9 @@ func increase_square_size(amount: int = 1) -> void:
 	current_square_size += amount
 
 	# Add new rings for the increased size
+	@warning_ignore("integer_division")
 	var half_old_size = old_size / 2
+	@warning_ignore("integer_division")
 	var half_new_size = current_square_size / 2
 
 	# Fill the new outer rings
@@ -104,10 +108,9 @@ func decrease_square_size(amount: int = 1) -> void:
 		print("Cannot decrease square below size 1")
 		amount = current_square_size - 1
 
-	var old_size = current_square_size
 	current_square_size -= amount
 
-	var half_old_size = old_size / 2
+	@warning_ignore("integer_division")
 	var half_new_size = current_square_size / 2
 
 	# Remove cells that are now outside the new square bounds

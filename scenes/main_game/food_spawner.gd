@@ -29,7 +29,7 @@ func _spawn_food() -> void:
 		food.gravity_scale = current_gravity_scale
 	
 	food.hit_floor.connect(func():
-		game.strikes += 0
+		game.strikes += 1
 	)
 	add_child(food)
 	
