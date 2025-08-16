@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://hnw3o8nv0dav"]
+[gd_scene load_steps=6 format=3 uid="uid://hnw3o8nv0dav"]
 
 [ext_resource type="Script" uid="uid://bxx7k1v0tl00c" path="res://scenes/main/main.gd" id="1_yd8kv"]
 [ext_resource type="PackedScene" uid="uid://bsahrcofylke2" path="res://scenes/main_menu/main_menu.tscn" id="3_iba00"]
-[ext_resource type="PackedScene" uid="uid://741hs8x5jd5c" path="res://scenes/main_game/main_game.tscn" id="3_k2fmo"]
+[ext_resource type="PackedScene" uid="uid://c10jxpa1iidnd" path="res://scenes/main_game/main_game.tscn" id="3_k2fmo"]
+[ext_resource type="AudioStream" uid="uid://d3mdyfkrplud5" path="res://assets/sounds/MUS_Main.ogg" id="4_l3cfh"]
+[ext_resource type="AudioStream" uid="uid://pi7ypjobh16g" path="res://assets/sounds/SFX_UI_Select.ogg" id="5_6q06x"]
 
 [node name="Main" type="Node" node_paths=PackedStringArray("main_menu", "main_game")]
 script = ExtResource("1_yd8kv")
@@ -12,3 +14,10 @@ main_game = NodePath("MainGame")
 [node name="MainGame" parent="." instance=ExtResource("3_k2fmo")]
 
 [node name="MainMenu" parent="." instance=ExtResource("3_iba00")]
+
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_l3cfh")
+autoplay = true
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6q06x")

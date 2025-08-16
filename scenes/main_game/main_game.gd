@@ -17,6 +17,10 @@ const MAX_STRIKES:int = 3
 
 ## Current selected crate
 var selected_crate:Crate
+var crate_cost: int = 2:
+	set(new_cost):
+		crate_cost = new_cost
+		ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
 
 var score:int = 0:
 	set(new_score):
@@ -41,7 +45,12 @@ func _ready() -> void:
 	custom_grid_map.create_square(Vector3i(0,0,0), 8)
 	process_mode = Node.PROCESS_MODE_DISABLED
 	ui.hide()
-	ui.buy_crate_button.pressed.connect(add_crate)
+	ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
+	ui.buy_crate_button.pressed.connect(func():
+		if score >= crate_cost:
+			score -= crate_cost
+			add_crate()
+		)
 
 func _process(delta:float) -> void:
 	elapsed_seconds += delta
@@ -50,14 +59,17 @@ func start() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
 	add_crate()
 	ui.show()
+	$BackgroundMusic.play()
 	
 func add_crate() -> void:
+	$SelectSound.play()
 	var crate:Crate = ground_spawner.spawn_crate()
 	crate.selected.connect(_on_crate_selected.bind(crate))
 	crate.caught.connect(_on_food_caught)
 
 func _on_food_caught(food:Food):
 	score += food.type.points
+	$GoodSound.play()
 
 func _on_crate_selected(crate:Crate):
 	print("crate selected ", crate)
