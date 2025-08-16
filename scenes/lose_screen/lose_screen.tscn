@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4dhupruit5oe"]
+
+[ext_resource type="Script" uid="uid://lbbqs0x1i12l" path="res://scenes/lose_screen/lose_screen.gd" id="1_tg53y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_aowuj"]
+font_size = 46
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tg53y"]
+
+[node name="LoseScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tg53y")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ratio = 1.7778
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+color = Color(0.334473, 0.631308, 0.824719, 1)
+
+[node name="VFlowContainer" type="VFlowContainer" parent="AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Game over! The kitchen became too messy..."
+label_settings = SubResource("LabelSettings_aowuj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="AspectRatioContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+theme_override_constants/separation = 35
+theme_override_styles/separator = SubResource("StyleBoxEmpty_tg53y")
+
+[node name="Button" type="Button" parent="AspectRatioContainer/MarginContainer/VFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Try your luck again"
+
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VFlowContainer/Button" to="." method="_on_button_pressed"]
