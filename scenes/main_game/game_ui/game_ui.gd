@@ -10,7 +10,7 @@ class_name GameplayUI extends Control
 
 func _ready() -> void:
 	game.score_changed.connect(func(new_score:int):
-		score_label.text = "Score: %05d" % new_score
+		score_label.text = "Points: %05d" % new_score
 	)
 	
 	for i:int in range(0, game.MAX_STRIKES):
@@ -33,8 +33,6 @@ func add_strike_display():
 	strike.texture = strike_texture
 	strike.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 	strike_container.add_child(strike)
-	
-
 
 func _on_stage_manager_stage_changed(_new_stage: int, description: String) -> void:
 	stage_label.visible = true
