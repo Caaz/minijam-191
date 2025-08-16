@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ddc4jjhtow8bp"]
 
-[ext_resource type="Script" uid="uid://p0c0chjrgtc1" path="res://scenes/gameplay_ui/gameplay_ui.gd" id="1_p5s7u"]
+[ext_resource type="Script" uid="uid://p0c0chjrgtc1" path="res://scenes/game/game_ui/game_ui.gd" id="1_p5s7u"]
 [ext_resource type="LabelSettings" uid="uid://b02px5y2os0hw" path="res://resources/default_labelsettings.tres" id="2_p5s7u"]
 [ext_resource type="Texture2D" uid="uid://cb12k4q82kx88" path="res://assets/crate.png" id="3_avg3y"]
 
@@ -11,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_p5s7u")
 score_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/ScoreLabel")
 time_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/TimeLabel")
@@ -52,6 +53,7 @@ label_settings = ExtResource("2_p5s7u")
 [node name="Spacer" type="Control" parent="AspectRatioContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="BoxContainer2" type="BoxContainer" parent="AspectRatioContainer/MarginContainer/BoxContainer"]
 layout_mode = 2

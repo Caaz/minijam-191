@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl7821asov8eb"]
-
-[ext_resource type="Script" uid="uid://cfm0j1aekwmk3" path="res://scenes/food_spawner/food_spawner.gd" id="1_hp1gc"]
-
-[node name="FoodSpawner" type="Node3D"]
-script = ExtResource("1_hp1gc")

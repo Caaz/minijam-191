@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnhhkhevlvw3"]
+
+[ext_resource type="Script" uid="uid://haiqsiatt30y" path="res://scenes/game/path/path.gd" id="1_lsgtm"]
+[ext_resource type="Script" uid="uid://c8rainoecpyie" path="res://addons/lines_and_trails_3d/line_3d.gd" id="2_0tge1"]
+
+[sub_resource type="Curve3D" id="Curve3D_iayb0"]
+
+[node name="Path" type="Path3D" node_paths=PackedStringArray("line")]
+curve = SubResource("Curve3D_iayb0")
+script = ExtResource("1_lsgtm")
+line = NodePath("Line3D")
+
+[node name="Line3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+script = ExtResource("2_0tge1")
+width = 1.0
+color = Color(0, 0.635294, 0.384314, 1)
+material_type = 0
+metadata/_custom_type_script = "uid://c8rainoecpyie"

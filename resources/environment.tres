@@ -1,6 +1,6 @@
 [gd_resource type="Environment" load_steps=4 format=3 uid="uid://bfh08x2qquc5i"]
 
-[ext_resource type="Texture2D" uid="uid://j8bpwcs5xcg1" path="res://darknightskystuff/assets/blue_photo_studio_2k.hdr" id="1_f7h4m"]
+[ext_resource type="Texture2D" uid="uid://j8bpwcs5xcg1" path="res://assets/blue_photo_studio_2k.hdr" id="1_f7h4m"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r0du0"]
 panorama = ExtResource("1_f7h4m")
