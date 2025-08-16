@@ -16,13 +16,12 @@ func _ready() -> void:
 	collision_shape.shape = type.collision_shape
 	initial_height = global_position.y
 	drop_indicator.material_override = drop_indicator.material_override.duplicate(true)
-	drop_indicator.position = Vector3(global_position.x, 0.001, global_position.z)
+	drop_indicator.position = Vector3(global_position.x, 0.5, global_position.z)
 	drop_material = drop_indicator.material_override as ShaderMaterial
 	drop_material.set_shader_parameter('icon', type.icon)
 
 func _physics_process(_delta) -> void:
 	# Update progress circle based on height
-	var current_height = global_position.y
 	var progress = 1.0 - clamp(global_position.y / initial_height, 0.0, 1.0)
 	drop_material.set_shader_parameter('amount', progress)
 

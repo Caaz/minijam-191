@@ -92,9 +92,10 @@ func _get_stage_config(stage: int) -> Dictionary:
 
 func _update_food_spawner(spawn_interval: float, gravity_scale: float) -> void:
 	# Find food spawner and update its settings
-	var food_spawner = get_tree().get_first_node_in_group("food_spawner")
-	if food_spawner and food_spawner.has_method("update_spawn_settings"):
-		food_spawner.update_spawn_settings(spawn_interval, gravity_scale)
+	var food_spawner:FoodSpawner = get_tree().get_first_node_in_group("food_spawner") as FoodSpawner
+	if not food_spawner:
+		return
+	food_spawner.update_spawn_settings(spawn_interval, gravity_scale)
 
 # Public methods for external access
 func get_current_stage() -> int:

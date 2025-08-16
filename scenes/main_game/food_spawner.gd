@@ -1,4 +1,4 @@
-extends Area3D
+class_name FoodSpawner extends Area3D
 @export var FoodScene:PackedScene
 
 @export var spawn_area:CollisionShape3D
@@ -20,13 +20,7 @@ func _spawn_food() -> void:
 	food.position = _get_spawnpoint()
 	
 	# Apply current gravity scale to the food
-	if food.has_method("set_gravity_scale"):
-		food.set_gravity_scale(current_gravity_scale)
-	elif food.has_property("gravity_scale"):
-		food.gravity_scale = current_gravity_scale
-	# If food is a RigidBody3D, set gravity_scale directly
-	elif food is RigidBody3D:
-		food.gravity_scale = current_gravity_scale
+	food.gravity_scale = current_gravity_scale
 	
 	food.hit_floor.connect(func():
 		game.strikes += 1
@@ -50,9 +44,3 @@ func _get_spawnpoint() -> Vector3:
 func update_spawn_settings(new_interval: float, gravity_scale: float) -> void:
 	spawn_timer.wait_time = new_interval
 	current_gravity_scale = gravity_scale
-	print("Updated spawn settings - Interval: ", new_interval, ", Gravity Scale: ", gravity_scale)
-
-# Backwards compatibility method
-func update_spawn_interval(new_interval: float) -> void:
-	spawn_timer.wait_time = new_interval
-	print("Updated spawn interval to: ", new_interval)
