@@ -40,6 +40,7 @@ enabled=PackedStringArray("res://addons/godot_resource_groups/plugin.cfg", "res:
 [global_group]
 
 crate=""
+floor=""
 
 [godot_resource_groups]
 
@@ -61,6 +62,7 @@ select={
 
 3d_physics/layer_1="Environment"
 3d_physics/layer_2="Crate"
+3d_physics/layer_3="Food"
 
 [rendering]
 

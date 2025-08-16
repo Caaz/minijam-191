@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnhhkhevlvw3"]
+
+[ext_resource type="Script" uid="uid://haiqsiatt30y" path="res://scenes/main_game/path/path.gd" id="1_lsgtm"]
+[ext_resource type="Script" uid="uid://c8rainoecpyie" path="res://addons/lines_and_trails_3d/line_3d.gd" id="2_0tge1"]
+[ext_resource type="Texture2D" uid="uid://djix863yme0v7" path="res://assets/kenney-ui-pack/Vector/Grey/arrow_basic_s.svg" id="3_0tge1"]
+
+[sub_resource type="Curve3D" id="Curve3D_iayb0"]
+
+[node name="Path" type="Path3D" node_paths=PackedStringArray("line", "follower")]
+top_level = true
+curve = SubResource("Curve3D_iayb0")
+script = ExtResource("1_lsgtm")
+line = NodePath("Line3D")
+follower = NodePath("PathFollow3D")
+
+[node name="Line3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+script = ExtResource("2_0tge1")
+width = 1.0
+color = Color(0, 0.635294, 0.384314, 1)
+material_type = 0
+metadata/_custom_type_script = "uid://c8rainoecpyie"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+loop = false
+
+[node name="Sprite3D" type="Sprite3D" parent="PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48909, 0)
+pixel_size = 0.1
+texture = ExtResource("3_0tge1")
