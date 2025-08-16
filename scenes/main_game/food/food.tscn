@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://chihdjvv7b61o"]
+
+[ext_resource type="Script" uid="uid://bs6b7ptrf4rjp" path="res://scenes/main_game/food/food.gd" id="1_77ovl"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jvm58"]
+bounce = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o4lbg"]
+
+[node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape")]
+collision_layer = 6
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_jvm58")
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_77ovl")
+mesh_instance = NodePath("MeshInstance3D")
+collision_shape = NodePath("CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_o4lbg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]

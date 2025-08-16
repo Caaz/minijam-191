@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="FoodType" load_steps=4 format=3 uid="uid://baap6p5yrxdxd"]
+
+[ext_resource type="ArrayMesh" uid="uid://d4lcnbdk758lc" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_potato.obj" id="1_8bc4i"]
+[ext_resource type="Script" uid="uid://l6skux8jjlap" path="res://resources/food_type.gd" id="1_tx3fl"]
+[ext_resource type="Texture2D" uid="uid://horrv83ux3uk" path="res://assets/food-icon/potato.png" id="1_y0phu"]
+
+[resource]
+script = ExtResource("1_tx3fl")
+mesh = ExtResource("1_8bc4i")
+icon = ExtResource("1_y0phu")
+name = "Potato"
+points = 1
+fall_speed = 1.0
+metadata/_custom_type_script = "uid://l6skux8jjlap"

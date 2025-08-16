@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceGroup" load_steps=2 format=3 uid="uid://cc273nes4gott"]
+
+[ext_resource type="Script" uid="uid://hsivr6oymotw" path="res://addons/godot_resource_groups/resource_group.gd" id="1_fb2v3"]
+
+[resource]
+script = ExtResource("1_fb2v3")
+base_folder = "res://resources/food_types"
+includes = Array[String]([])
+excludes = Array[String]([])
+paths = Array[String](["res://resources/food_types/carrot.tres", "res://resources/food_types/potato.tres", "res://resources/food_types/steak.tres", "res://resources/food_types/tomato.tres"])
+metadata/_custom_type_script = "uid://hsivr6oymotw"

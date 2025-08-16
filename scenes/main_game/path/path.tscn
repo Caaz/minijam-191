@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnhhkhevlvw3"]
+
+[ext_resource type="Script" uid="uid://haiqsiatt30y" path="res://scenes/main_game/path/path.gd" id="1_lsgtm"]
+[ext_resource type="Script" uid="uid://c8rainoecpyie" path="res://addons/lines_and_trails_3d/line_3d.gd" id="2_0tge1"]
+[ext_resource type="ArrayMesh" uid="uid://cu3y2b7wxlyq3" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate.obj" id="3_fs782"]
+
+[sub_resource type="Curve3D" id="Curve3D_iayb0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fs782"]
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(2.64719e-07, 0.312062, 0.248276, 0.458824)
+
+[node name="Path" type="Path3D" node_paths=PackedStringArray("line", "follower", "preview")]
+top_level = true
+curve = SubResource("Curve3D_iayb0")
+script = ExtResource("1_lsgtm")
+line = NodePath("Line3D")
+follower = NodePath("PathFollow3D")
+preview = NodePath("PreviewPosition")
+
+[node name="Line3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+script = ExtResource("2_0tge1")
+width = 1.0
+color = Color(0, 0.635294, 0.384314, 1)
+material_type = 0
+metadata/_custom_type_script = "uid://c8rainoecpyie"
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+loop = false
+
+[node name="PreviewPosition" type="PathFollow3D" parent="."]
+rotation_mode = 0
+tilt_enabled = false
+
+[node name="Crate" type="MeshInstance3D" parent="PreviewPosition"]
+mesh = ExtResource("3_fs782")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_fs782")
