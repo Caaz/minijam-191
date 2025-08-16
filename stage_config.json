@@ -1,0 +1,44 @@
+{
+	"stage_duration": 5.0,
+	"default_config": {
+		"spawn_interval": 2.0,
+		"spawn_interval_decrease": 0.1,
+		"min_spawn_interval": 0.3,
+		"gravity_scale": 1.0,
+		"gravity_scale_increase": 0.1,
+		"max_gravity_scale": 3.0,
+		"description": "Stage {stage}"
+	},
+	"stage_configs": {
+		"1": {
+			"spawn_interval": 2.0,
+			"gravity_scale": 0.5,
+			"description": "STAGE 1"
+		},
+		"2": {
+			"spawn_interval": 2.0,
+			"gravity_scale": 0.5,
+			"description": "STAGE 2"
+		},
+		"3": {
+			"spawn_interval": 1.5,
+			"gravity_scale": 1.0,
+			"description": "STAGE 3: Mini-boss!"
+		},
+		"5": {
+			"spawn_interval": 0.1,
+			"gravity_scale": 2.0,
+			"description": "STAGE 5: Boss!"
+		},
+		"10": {
+			"spawn_interval": 0.5,
+			"gravity_scale": 2.5,
+			"description": "Intense Chaos - Maximum Speed!"
+		},
+		"15": {
+			"spawn_interval": 0.3,
+			"gravity_scale": 3.0,
+			"description": "Ultimate Challenge - Survive if you can!"
+		}
+	}
+}

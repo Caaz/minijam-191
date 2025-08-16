@@ -27,6 +27,7 @@ config/name="minijam-191"
 run/main_scene="uid://hnw3o8nv0dav"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+config/defaults/default_environment=""
 
 [display]
 

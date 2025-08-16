@@ -3,6 +3,7 @@ class_name GameplayUI extends Control
 @export var game:MainGame
 @export var score_label:Label
 @export var time_label:Label
+@export var stage_label:Label
 @export var buy_crate_button:Button
 @export var strike_container:Control
 @export var strike_texture:Texture2D
@@ -31,3 +32,10 @@ func add_strike_display():
 	strike.texture = strike_texture
 	strike.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 	strike_container.add_child(strike)
+	
+
+
+func _on_stage_manager_stage_changed(new_stage: int, description: String) -> void:
+	stage_label.visible = true
+	stage_label.text = description
+	pass # Replace with function body.
