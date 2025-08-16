@@ -19,7 +19,7 @@ func _ready() -> void:
 		var strike:Node = strike_container.get_child(strike_count - 1)
 		if not strike:
 			return
-		strike.show()
+		strike.visible = true
 	)
 	game.seconds_changed.connect(func(seconds:float):
 		time_label.text = "Time: %02d:%02d" % [floor(seconds/60), (fmod(seconds, 60))]
@@ -27,6 +27,7 @@ func _ready() -> void:
 
 func add_strike_display():
 	var strike = TextureRect.new()
+	strike.visible = false
 	strike.texture = strike_texture
 	strike.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 	strike_container.add_child(strike)

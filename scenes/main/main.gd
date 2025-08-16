@@ -8,3 +8,7 @@ func _ready() -> void:
 		main_game.start()
 		main_menu.hide()
 	)
+	
+	main_game.game_over.connect(func():
+		get_tree().change_scene_to_file("res://scenes/lose_screen/lose_screen.tscn")
+		)
