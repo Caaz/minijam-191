@@ -41,7 +41,7 @@ modulate_color = Color(0.252, 0.56, 0.503533, 1)
 
 [resource]
 Button/colors/font_color = Color(0.0687985, 0.0687982, 0.0687982, 1)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_focus_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
 Button/colors/font_hover_color = Color(0.0666094, 0.184639, 0.329643, 1)
 Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_7ct1h")
