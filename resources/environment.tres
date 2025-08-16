@@ -4,6 +4,7 @@
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r0du0"]
 panorama = ExtResource("1_f7h4m")
+energy_multiplier = 1.6
 
 [sub_resource type="Sky" id="Sky_cm0pq"]
 sky_material = SubResource("PanoramaSkyMaterial_r0du0")
@@ -13,5 +14,6 @@ background_mode = 1
 background_color = Color(0.423529, 0.682353, 0.996078, 1)
 sky = SubResource("Sky_cm0pq")
 ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_exposure = 1.3
 glow_enabled = true

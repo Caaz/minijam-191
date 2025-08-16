@@ -17,10 +17,9 @@ func _ready() -> void:
 		add_strike_display()
 		
 	game.strikes_changed.connect(func(strike_count:int):
-		print(strike_count)
-		var strike:Node = strike_container.get_child(strike_count)
-		if not strike:
+		if strike_count >= strike_container.get_child_count():
 			return
+		var strike:Node = strike_container.get_child(strike_count)
 		strike.visible = true
 	)
 	game.seconds_changed.connect(func(seconds:float):

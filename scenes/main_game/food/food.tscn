@@ -1,13 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://chihdjvv7b61o"]
+[gd_scene load_steps=8 format=3 uid="uid://chihdjvv7b61o"]
 
 [ext_resource type="Script" uid="uid://bs6b7ptrf4rjp" path="res://scenes/main_game/food/food.gd" id="1_77ovl"]
+[ext_resource type="Shader" uid="uid://c10rmkkg8i50d" path="res://shaders/radial-timer.gdshader" id="2_l7gct"]
+[ext_resource type="Texture2D" uid="uid://imbfmdiekmqh" path="res://assets/food-icon/carrot.png" id="3_ymw4n"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jvm58"]
 bounce = 0.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_o4lbg"]
 
-[node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ymw4n"]
+render_priority = 0
+shader = ExtResource("2_l7gct")
+shader_parameter/amount = 0.31
+shader_parameter/albedo = Color(0.391377, 0.887929, 0.688153, 1)
+shader_parameter/icon = ExtResource("3_ymw4n")
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pgyaf"]
+size = Vector2(128, 128)
+
+[node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape", "drop_indicator")]
 collision_layer = 6
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_jvm58")
@@ -17,8 +29,15 @@ max_contacts_reported = 1
 script = ExtResource("1_77ovl")
 mesh_instance = NodePath("MeshInstance3D")
 collision_shape = NodePath("CollisionShape3D")
+drop_indicator = NodePath("DropIndicator")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_o4lbg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="DropIndicator" type="Sprite3D" parent="."]
+top_level = true
+material_override = SubResource("ShaderMaterial_ymw4n")
+axis = 1
+texture = SubResource("PlaceholderTexture2D_pgyaf")
