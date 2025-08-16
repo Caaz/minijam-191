@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4dhupruit5oe"]
+[gd_scene load_steps=5 format=3 uid="uid://c4dhupruit5oe"]
 
 [ext_resource type="Script" uid="uid://lbbqs0x1i12l" path="res://scenes/lose_screen/lose_screen.gd" id="1_tg53y"]
+[ext_resource type="AudioStream" uid="uid://behn0rm4ni7nk" path="res://assets/sounds/MUS_Win.ogg" id="2_aywvn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_aowuj"]
 font_size = 46
@@ -55,5 +56,10 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Try your luck again"
+
+[node name="EndGameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_aywvn")
+volume_db = -15.0
+autoplay = true
 
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VFlowContainer/Button" to="." method="_on_button_pressed"]
