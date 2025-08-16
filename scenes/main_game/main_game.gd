@@ -11,6 +11,7 @@ const MAX_STRIKES:int = 3
 ## This node handles raycasts for clicks, because I don't want to bother with managing all the raycast code for doing this manually.
 @export var click_raycast:RayCast3D
 @export var ui:GameplayUI
+@export var ground_spawner: GroundSpawner
 
 ## Current selected crate
 var selected_crate:Crate
@@ -48,10 +49,9 @@ func start() -> void:
 	ui.show()
 	
 func add_crate() -> void:
-	var crate:Crate = CrateScene.instantiate() as Crate
+	var crate:Crate = ground_spawner.spawn_crate()
 	crate.selected.connect(_on_crate_selected.bind(crate))
 	crate.caught.connect(_on_food_caught)
-	add_child(crate)
 
 func _on_food_caught(food:Food):
 	score += food.type.points

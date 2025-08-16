@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://741hs8x5jd5c"]
+[gd_scene load_steps=19 format=4 uid="uid://741hs8x5jd5c"]
 
 [ext_resource type="Script" uid="uid://bo1xh0uxn0hje" path="res://scenes/main_game/main_game.gd" id="1_i3kwu"]
 [ext_resource type="PackedScene" uid="uid://bl8moy187rtp4" path="res://scenes/main_game/crate/crate.tscn" id="2_mijjq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cbyb4kexa7b0s" path="res://scenes/main_game/food_spawner.gd" id="5_fetp2"]
 [ext_resource type="PackedScene" uid="uid://chihdjvv7b61o" path="res://scenes/main_game/food/food.tscn" id="6_b4n6q"]
 [ext_resource type="Resource" uid="uid://cc273nes4gott" path="res://resources/food_types.tres" id="7_gl27v"]
+[ext_resource type="Script" uid="uid://dq78jf56cvepu" path="res://scenes/main_game/ground_spawner.gd" id="8_mijjq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa35d"]
 resource_name = "restaurant"
@@ -78,12 +79,16 @@ friction = 0.5
 [sub_resource type="BoxShape3D" id="BoxShape3D_7wsgf"]
 size = Vector3(30, 10, 30)
 
-[node name="MainGame" type="Node3D" node_paths=PackedStringArray("camera", "click_raycast", "ui")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_i3kwu"]
+size = Vector3(29.9883, 0.001, 30.1721)
+
+[node name="MainGame" type="Node3D" node_paths=PackedStringArray("camera", "click_raycast", "ui", "ground_spawner")]
 script = ExtResource("1_i3kwu")
 CrateScene = ExtResource("2_mijjq")
 camera = NodePath("Camera3D")
 click_raycast = NodePath("ClickRayCast")
 ui = NodePath("GameplayUI")
+ground_spawner = NodePath("GroundSpawner")
 
 [node name="GameplayUI" parent="." node_paths=PackedStringArray("game") instance=ExtResource("3_ldk84")]
 game = NodePath("..")
@@ -134,3 +139,16 @@ transform = Transform3D(-1, 5.17582e-16, 8.74228e-08, 7.80852e-08, 0.449678, 0.8
 [node name="ClickRayCast" type="RayCast3D" parent="."]
 top_level = true
 enabled = false
+
+[node name="GroundSpawner" type="Area3D" parent="." node_paths=PackedStringArray("spawn_area")]
+collision_layer = 0
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("8_mijjq")
+CrateScene = ExtResource("2_mijjq")
+spawn_area = NodePath("CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GroundSpawner"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0126836, 0)
+shape = SubResource("BoxShape3D_i3kwu")
