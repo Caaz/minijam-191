@@ -10,17 +10,28 @@ const MAX_STRIKES:int = 3
 @export var camera:Camera3D
 ## This node handles raycasts for clicks, because I don't want to bother with managing all the raycast code for doing this manually.
 @export var click_raycast:RayCast3D
+@export var click_raycast_crates:RayCast3D
 @export var ui:GameplayUI
 @export var ground_spawner: GroundSpawner
 
 @export var custom_grid_map: CustomGridMap
+
+var current_upgrade_mode: GlobalData.CrateUpgrade = GlobalData.CrateUpgrade.NONE:
+	set(new_upgrade_mode):
+		current_upgrade_mode = new_upgrade_mode
+		if new_upgrade_mode == GlobalData.CrateUpgrade.NONE:
+			process_mode = Node.PROCESS_MODE_INHERIT
+		else:
+			process_mode = Node.PROCESS_MODE_DISABLED
+	get():
+		return current_upgrade_mode
 
 ## Current selected crate
 var selected_crate:Crate
 var crate_cost: int = 2:
 	set(new_cost):
 		crate_cost = new_cost
-		ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
+		#ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
 
 var score:int = 0:
 	set(new_score):
@@ -47,11 +58,14 @@ func _ready() -> void:
 	custom_grid_map.create_square(Vector3i(0,0,0), 8)
 	process_mode = Node.PROCESS_MODE_DISABLED
 	ui.hide()
-	ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
+	#ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
 	ui.buy_crate_button.pressed.connect(func():
 		if score >= crate_cost:
 			score -= crate_cost
 			add_crate()
+		)
+	ui.upgrade_crate_speed_button.pressed.connect(func():
+		current_upgrade_mode = GlobalData.CrateUpgrade.SPEED
 		)
 
 func _process(delta:float) -> void:
@@ -82,7 +96,6 @@ func _on_crate_selected(crate:Crate):
 	selected_crate.new_path()
 
 func _input(event:InputEvent):
-	
 	if not selected_crate:
 		return
 		
@@ -103,5 +116,4 @@ func _input(event:InputEvent):
 	click_raycast.force_raycast_update()
 	if not click_raycast.is_colliding():
 		return
-		
 	selected_crate.path.add_point(click_raycast.get_collision_point())
