@@ -7,6 +7,8 @@ func _ready() -> void:
 	main_menu.play_button.pressed.connect(func():
 		main_game.start()
 		main_menu.hide()
+		$MainMenuMusic.stop()
+		$SelectSound.play()
 	)
 	
 	main_game.game_over.connect(func():

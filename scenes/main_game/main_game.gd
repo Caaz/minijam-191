@@ -51,14 +51,17 @@ func start() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
 	add_crate()
 	ui.show()
+	$BackgroundMusic.play()
 	
 func add_crate() -> void:
+	$SelectSound.play()
 	var crate:Crate = ground_spawner.spawn_crate()
 	crate.selected.connect(_on_crate_selected.bind(crate))
 	crate.caught.connect(_on_food_caught)
 
 func _on_food_caught(food:Food):
 	score += food.type.points
+	$GoodSound.play()
 
 func _on_crate_selected(crate:Crate):
 	print("crate selected ", crate)

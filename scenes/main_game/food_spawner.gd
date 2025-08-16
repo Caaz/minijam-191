@@ -30,6 +30,7 @@ func _spawn_food() -> void:
 	
 	food.hit_floor.connect(func():
 		game.strikes += 1
+		$"../BadSound".play()
 	)
 	add_child(food)
 	
