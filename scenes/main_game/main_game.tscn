@@ -106,10 +106,10 @@ collision_mask = 0
 script = ExtResource("5_ldk84")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.333544, 0.942735, 0, -0.942735, -0.333544, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.260505, 0.965473, 0, -0.965473, -0.260505, 0, 0, 0)
+light_angular_distance = 45.0
 shadow_enabled = true
 shadow_bias = 2.0
-shadow_blur = 0.0
 directional_shadow_fade_start = 0.511
 directional_shadow_max_distance = 60.2
 
