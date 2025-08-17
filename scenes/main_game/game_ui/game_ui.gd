@@ -56,6 +56,10 @@ func _input(event: InputEvent) -> void:
 				var upgrade_cost = crate.get_upgrade_cost(game.current_upgrade_mode)
 				if upgrade_cost <= game.score and upgrade_cost >= 0:
 					crate.upgrade(game.current_upgrade_mode)
+					if game.current_upgrade_mode == GlobalData.UpgradeMode.CRATE_SPEED:
+						$UpgradeCrateSpeedSFX.play()
+					elif game.current_upgrade_mode == GlobalData.UpgradeMode.CRATE_SIZE:
+						$UpgradeCrateSizeSFX.play()
 					game.score -= upgrade_cost
 					disable_all_upgrade_buttons()
 	pass
