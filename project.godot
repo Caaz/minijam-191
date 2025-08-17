@@ -46,6 +46,9 @@ import/blender/enabled=false
 
 crate=""
 floor=""
+music=""
+sfx=""
+food=""
 
 [godot_resource_groups]
 

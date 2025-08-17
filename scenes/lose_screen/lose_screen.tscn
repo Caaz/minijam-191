@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4dhupruit5oe"]
+[gd_scene load_steps=4 format=3 uid="uid://c4dhupruit5oe"]
 
 [ext_resource type="Script" uid="uid://lbbqs0x1i12l" path="res://scenes/lose_screen/lose_screen.gd" id="1_tg53y"]
-[ext_resource type="AudioStream" uid="uid://behn0rm4ni7nk" path="res://assets/sounds/MUS_Win.ogg" id="2_aywvn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_aowuj"]
 font_size = 46
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.419608)
+shadow_offset = Vector2(4, 4)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tg53y"]
 
-[node name="LoseScreen" type="Control"]
+[node name="LoseScreen" type="Control" node_paths=PackedStringArray("reset_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,6 +18,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tg53y")
+reset_button = NodePath("AspectRatioContainer/MarginContainer/PanelContainer/VFlowContainer/Button")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.334473, 0.631308, 0.824719, 1)
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -26,19 +39,19 @@ grow_horizontal = 2
 grow_vertical = 2
 ratio = 1.7778
 
-[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+[node name="MarginContainer" type="CenterContainer" parent="AspectRatioContainer"]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="AspectRatioContainer/MarginContainer"]
 layout_mode = 2
-color = Color(0.334473, 0.631308, 0.824719, 1)
 
-[node name="VFlowContainer" type="VFlowContainer" parent="AspectRatioContainer/MarginContainer"]
+[node name="VFlowContainer" type="BoxContainer" parent="AspectRatioContainer/MarginContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 alignment = 1
+vertical = true
 
-[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VFlowContainer"]
+[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/PanelContainer/VFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Game over! The kitchen became too messy..."
@@ -46,20 +59,13 @@ label_settings = SubResource("LabelSettings_aowuj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="AspectRatioContainer/MarginContainer/VFlowContainer"]
+[node name="HSeparator" type="HSeparator" parent="AspectRatioContainer/MarginContainer/PanelContainer/VFlowContainer"]
 layout_mode = 2
 theme_override_constants/separation = 35
 theme_override_styles/separator = SubResource("StyleBoxEmpty_tg53y")
 
-[node name="Button" type="Button" parent="AspectRatioContainer/MarginContainer/VFlowContainer"]
+[node name="Button" type="Button" parent="AspectRatioContainer/MarginContainer/PanelContainer/VFlowContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Try your luck again"
-
-[node name="EndGameMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_aywvn")
-volume_db = -15.0
-autoplay = true
-
-[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VFlowContainer/Button" to="." method="_on_button_pressed"]

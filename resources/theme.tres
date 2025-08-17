@@ -1,7 +1,9 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bjo6v8yf433ox"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://bjo6v8yf433ox"]
 
 [ext_resource type="FontFile" uid="uid://b28hbwju8xmrs" path="res://assets/Chubby Thumbs.ttf" id="1_7ct1h"]
 [ext_resource type="Texture2D" uid="uid://cenianjapa0ib" path="res://assets/kenney-ui-pack/Vector/Grey/button_rectangle_depth_flat.svg" id="2_886mr"]
+[ext_resource type="Texture2D" uid="uid://dreth3q1rihi0" path="res://assets/kenney-ui-pack/Vector/Green/icon_circle.svg" id="3_886mr"]
+[ext_resource type="Texture2D" uid="uid://b0i46kwesauyn" path="res://assets/kenney-ui-pack/Vector/Grey/icon_circle.svg" id="4_b751m"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b751m"]
 load_path = "res://.godot/imported/button_rectangle_depth_flat.svg-f60467cfdf4dbbfd3b908bb40ab0ce00.ctex"
@@ -39,6 +41,49 @@ texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 modulate_color = Color(0.252, 0.56, 0.503533, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_886mr"]
+bg_color = Color(0.184314, 0.843137, 0.572549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0196078, 0.435294, 0.262745, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_owntx"]
+bg_color = Color(0.184314, 0.843137, 0.572549, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.0196078, 0.435294, 0.262745, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ct1h"]
+bg_color = Color(0.392157, 0.85098, 0.780392, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 16.0
+expand_margin_top = 16.0
+expand_margin_right = 16.0
+expand_margin_bottom = 16.0
+shadow_color = Color(0, 0, 0, 0.388235)
+shadow_size = 2
+shadow_offset = Vector2(4, 4)
+
 [resource]
 Button/colors/font_color = Color(0.0687985, 0.0687982, 0.0687982, 1)
 Button/colors/font_focus_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
@@ -48,9 +93,17 @@ Button/fonts/font = ExtResource("1_7ct1h")
 Button/styles/hover = SubResource("StyleBoxTexture_owntx")
 Button/styles/normal = SubResource("StyleBoxTexture_aaf3v")
 Button/styles/pressed = SubResource("StyleBoxTexture_dhnw2")
+HSlider/constants/center_grabber = 1
+HSlider/icons/grabber = ExtResource("3_886mr")
+HSlider/icons/grabber_disabled = ExtResource("4_b751m")
+HSlider/icons/grabber_highlight = ExtResource("3_886mr")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_886mr")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_owntx")
+Label/colors/font_color = Color(0.0920573, 0.150956, 0.17152, 1)
 Label/font_sizes/font_size = 24
 Label/fonts/font = ExtResource("1_7ct1h")
 MarginContainer/constants/margin_bottom = 16
 MarginContainer/constants/margin_left = 16
 MarginContainer/constants/margin_right = 16
 MarginContainer/constants/margin_top = 16
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_7ct1h")

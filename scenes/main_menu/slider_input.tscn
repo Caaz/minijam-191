@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsqm4w2iwseo6"]
+
+[ext_resource type="Script" uid="uid://duup56c66vewg" path="res://scenes/main_menu/slider_input.gd" id="1_6okjq"]
+
+[node name="SliderInput" type="BoxContainer" node_paths=PackedStringArray("_slider", "_label")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical = true
+script = ExtResource("1_6okjq")
+value = 1.0
+_slider = NodePath("HSlider")
+_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0

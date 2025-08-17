@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bsahrcofylke2"]
+[gd_scene load_steps=6 format=3 uid="uid://bsahrcofylke2"]
 
 [ext_resource type="Script" uid="uid://bd1uhleeti38t" path="res://scenes/main_menu/main_menu.gd" id="1_ob46e"]
 [ext_resource type="FontFile" uid="uid://b28hbwju8xmrs" path="res://assets/Chubby Thumbs.ttf" id="1_qhk2d"]
 [ext_resource type="Theme" uid="uid://bjo6v8yf433ox" path="res://resources/theme.tres" id="2_naxqw"]
+[ext_resource type="PackedScene" uid="uid://bsqm4w2iwseo6" path="res://scenes/main_menu/slider_input.tscn" id="4_uqeha"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hy6po"]
 font = ExtResource("1_qhk2d")
@@ -14,7 +15,7 @@ shadow_size = 0
 shadow_color = Color(0, 0, 0, 0.372549)
 shadow_offset = Vector2(6.46, 9.46)
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("play_button")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("play_button", "sfx_setting", "music_setting")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +24,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ob46e")
 play_button = NodePath("AspectRatioContainer/BoxContainer/CenterContainer/BoxContainer/PlayButton")
+sfx_setting = NodePath("AspectRatioContainer/FlowContainer/MarginContainer/PanelContainer/BoxContainer2/SfxInput")
+music_setting = NodePath("AspectRatioContainer/FlowContainer/MarginContainer/PanelContainer/BoxContainer2/MusicInput")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -57,8 +60,33 @@ layout_mode = 2
 theme = ExtResource("2_naxqw")
 text = "Play"
 
-[node name="SettingsButton" type="Button" parent="AspectRatioContainer/BoxContainer/CenterContainer/BoxContainer"]
+[node name="Spacer" type="Control" parent="AspectRatioContainer/BoxContainer/CenterContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 25.705)
 layout_mode = 2
-theme = ExtResource("2_naxqw")
-text = "Settings
-"
+
+[node name="FlowContainer" type="FlowContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+last_wrap_alignment = 3
+reverse_fill = true
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer/FlowContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="AspectRatioContainer/FlowContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="BoxContainer2" type="BoxContainer" parent="AspectRatioContainer/FlowContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+vertical = true
+
+[node name="MusicInput" parent="AspectRatioContainer/FlowContainer/MarginContainer/PanelContainer/BoxContainer2" instance=ExtResource("4_uqeha")]
+layout_mode = 2
+text = "Music Volume"
+value = 0.5
+
+[node name="SfxInput" parent="AspectRatioContainer/FlowContainer/MarginContainer/PanelContainer/BoxContainer2" instance=ExtResource("4_uqeha")]
+layout_mode = 2
+text = "SFX Volume"
+value = 0.5
