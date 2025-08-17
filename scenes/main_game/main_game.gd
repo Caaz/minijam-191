@@ -115,7 +115,7 @@ func _on_food_caught(food:Food):
 			var stream: AudioStream = food.type.collect_sounds.pick_random()
 			var audio_player: AudioStreamPlayer = $FoodCaughtSFX as AudioStreamPlayer
 			audio_player.stream = stream
-			audio_player.volume_linear = GlobalData.settings_values["sfx_volume_linear"]
+			audio_player.play()
 	else:
 		strikes+=1
 

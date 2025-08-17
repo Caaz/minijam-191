@@ -51,6 +51,7 @@ material = SubResource("StandardMaterial3D_ixc76")
 
 [node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape", "drop_indicator", "explosion") groups=["food"]]
 collision_layer = 6
+collision_mask = 3
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_jvm58")
 gravity_scale = 0.5
