@@ -20,8 +20,8 @@ score_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxCon
 time_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/TimeLabel")
 stage_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/StageLabel")
 buy_crate_button = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/BuyCrate")
-strike_container = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/StrikeContainer")
 upgrade_crate_speed_button = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/UpgradeCrateSpeed")
+strike_container = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/StrikeContainer")
 strike_texture = ExtResource("3_6i820")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
