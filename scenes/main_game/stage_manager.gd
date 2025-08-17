@@ -13,7 +13,6 @@ var stage:Stage:
 		$"../MusStinger".play()
 		if background_music.stream != stage.music:
 			background_music.stream = stage.music
-			background_music.play()
 
 var _level:int = -1:
 	set(new_index):
