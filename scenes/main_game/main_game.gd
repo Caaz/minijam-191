@@ -63,8 +63,17 @@ func _ready() -> void:
 			score -= crate_cost
 			add_crate()
 		)
-	ui.upgrade_crate_speed_button.pressed.connect(func():
-		current_upgrade_mode = GlobalData.UpgradeMode.CRATE_SPEED
+	ui.upgrade_crate_speed_button.toggled.connect(func(toggled_on: bool):
+		if toggled_on:
+			current_upgrade_mode = GlobalData.UpgradeMode.CRATE_SPEED
+		else:
+			current_upgrade_mode = GlobalData.UpgradeMode.NONE
+	)
+	ui.upgrade_crate_size_button.toggled.connect(func(toggled_on: bool):
+		if toggled_on:
+			current_upgrade_mode = GlobalData.UpgradeMode.CRATE_SIZE
+		else:
+			current_upgrade_mode = GlobalData.UpgradeMode.NONE
 	)
 
 func _process(delta:float) -> void:

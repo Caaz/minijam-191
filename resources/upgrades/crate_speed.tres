@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://754ecidkx362"]
+
+[ext_resource type="Texture2D" uid="uid://7s5q83132wn5" path="res://assets/ui-icons/speed/lightning.png" id="1_78ku3"]
+[ext_resource type="Script" uid="uid://cwhx68fxqj414" path="res://resources/upgrade.gd" id="1_exkbp"]
+
+[resource]
+script = ExtResource("1_exkbp")
+icon = ExtResource("1_78ku3")
+name = "Crate Speed"
+levels = []
+metadata/_custom_type_script = "uid://cwhx68fxqj414"

@@ -6,6 +6,7 @@ class_name GameplayUI extends Control
 @export var stage_label:Label
 @export var buy_crate_button:Button
 @export var upgrade_crate_speed_button: Button
+@export var upgrade_crate_size_button: Button
 @export var strike_container:Control
 @export var strike_texture:Texture2D
 @export var stage_manager:StageManager
@@ -46,17 +47,19 @@ func _input(event: InputEvent) -> void:
 			game.click_raycast_crates.target_position = game.camera.project_ray_normal(event.position) * 100
 			game.click_raycast_crates.force_raycast_update()
 			if not game.click_raycast_crates.is_colliding():
-				game.process_mode = Node.PROCESS_MODE_INHERIT
+				disable_all_upgrade_buttons()
 				return
 				
 			var collider = game.click_raycast_crates.get_collider()
 			if collider is Area3D:
 				var crate: Crate = collider.get_parent()
 				var upgrade_cost = crate.get_upgrade_cost(game.current_upgrade_mode)
-				if upgrade_cost <= game.score:
+				if upgrade_cost <= game.score and upgrade_cost >= 0:
 					crate.upgrade(game.current_upgrade_mode)
 					game.score -= upgrade_cost
-					game.current_upgrade_mode = GlobalData.UpgradeMode.NONE
-					game.process_mode = Node.PROCESS_MODE_INHERIT
+					disable_all_upgrade_buttons()
 	pass
-	
+
+func disable_all_upgrade_buttons() -> void:
+	upgrade_crate_size_button.button_pressed = false
+	upgrade_crate_speed_button.button_pressed = false
