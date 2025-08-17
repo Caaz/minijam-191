@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="FoodType" load_steps=4 format=3 uid="uid://baap6p5yrxdxd"]
+[gd_resource type="Resource" script_class="FoodType" load_steps=7 format=3 uid="uid://baap6p5yrxdxd"]
 
 [ext_resource type="ArrayMesh" uid="uid://d4lcnbdk758lc" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_potato.obj" id="1_8bc4i"]
 [ext_resource type="Script" uid="uid://l6skux8jjlap" path="res://resources/food_type.gd" id="1_tx3fl"]
+[ext_resource type="AudioStream" uid="uid://drxw16evgs4ql" path="res://assets/sounds/food_sounds/SFX_Potato_Collect_1.ogg" id="1_wyf0i"]
 [ext_resource type="Texture2D" uid="uid://horrv83ux3uk" path="res://assets/food-icon/potato.png" id="1_y0phu"]
+[ext_resource type="AudioStream" uid="uid://de1sq7n3x1sn7" path="res://assets/sounds/food_sounds/SFX_Potato_Collect_2.ogg" id="2_evtl5"]
+[ext_resource type="AudioStream" uid="uid://dw11t8aqor7dx" path="res://assets/sounds/food_sounds/SFX_Potato_Impact.ogg" id="4_jihsb"]
 
 [resource]
 script = ExtResource("1_tx3fl")
@@ -11,4 +14,5 @@ icon = ExtResource("1_y0phu")
 name = "Potato"
 points = 1
 fall_speed = 1.0
-metadata/_custom_type_script = "uid://l6skux8jjlap"
+collect_sounds = Array[AudioStream]([ExtResource("1_wyf0i"), ExtResource("2_evtl5")])
+impact_sound = ExtResource("4_jihsb")

@@ -244,7 +244,7 @@ background_music = NodePath("../BackgroundMusic")
 stream = ExtResource("11_fetp2")
 volume_db = -5.333
 
-[node name="GoodSound" type="AudioStreamPlayer" parent="." groups=["sfx"]]
+[node name="GoodSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_b4n6q")
 
 [node name="BadSound" type="AudioStreamPlayer" parent="." groups=["sfx"]]

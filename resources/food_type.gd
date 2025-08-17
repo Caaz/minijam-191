@@ -9,5 +9,7 @@ class_name FoodType extends Resource
 @export var name:String
 @export var points:int = 1
 @export var fall_speed:float = 1
+@export var collect_sounds: Array[AudioStream]
+@export var impact_sound: AudioStream
 
 var collision_shape:ConvexPolygonShape3D

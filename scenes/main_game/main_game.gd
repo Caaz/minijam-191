@@ -112,7 +112,17 @@ func add_crate() -> void:
 func _on_food_caught(food:Food):
 	if food.type.points > 0:
 		score += food.type.points
-		$GoodSound.play()
+		if food.type.collect_sounds.size() > 0:
+			var stream: AudioStream = food.type.collect_sounds.pick_random()
+			var audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
+			audio_player.stream = stream
+			audio_player.autoplay = true
+			audio_player.finished.connect(func():
+				audio_player.queue_free()
+				)
+			audio_player.add_to_group("sfx")
+			audio_player.volume_linear = GlobalData.settings_values["sfx_volume_linear"]
+			add_child(audio_player)
 	else:
 		strikes+=1
 

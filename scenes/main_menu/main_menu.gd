@@ -11,6 +11,7 @@ func _ready() -> void:
 	_update_audio_nodes(music_setting.value, &"music")
 	
 func _update_audio_nodes(volume_linear:float, group:StringName):
+	GlobalData.settings_values[group + "_volume_linear"] = volume_linear / 2
 	# For some reason at least for me, .5 - 1. sound fairly similar in volume and I imagine this is a real life physics thing.
 	volume_linear /= 2
 	var audio_nodes:Array[Node] = get_tree().get_nodes_in_group(group)
