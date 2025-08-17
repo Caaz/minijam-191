@@ -18,10 +18,10 @@ mouse_filter = 2
 script = ExtResource("1_p5s7u")
 score_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/ScoreLabel")
 time_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/TimeLabel")
-stage_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/VBoxContainer/StageLabel")
+stage_label = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/StageLabel")
 buy_crate_button = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/BuyCrate")
+strike_container = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/StrikeContainer")
 upgrade_crate_speed_button = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/UpgradeCrateSpeed")
-strike_container = NodePath("AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/VBoxContainer/StrikeContainer")
 strike_texture = ExtResource("3_6i820")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
@@ -40,6 +40,13 @@ layout_mode = 2
 layout_mode = 2
 vertical = true
 
+[node name="StageLabel" type="Label" parent="AspectRatioContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Level 1
+asdf"
+label_settings = ExtResource("2_p5s7u")
+horizontal_alignment = 1
+
 [node name="BoxContainer" type="BoxContainer" parent="AspectRatioContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
 
@@ -52,15 +59,7 @@ label_settings = ExtResource("2_p5s7u")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer"]
-layout_mode = 2
-
-[node name="StageLabel" type="Label" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Stage 1"
-label_settings = ExtResource("2_p5s7u")
-
-[node name="StrikeContainer" type="BoxContainer" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer/VBoxContainer"]
+[node name="StrikeContainer" type="BoxContainer" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 

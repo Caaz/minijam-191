@@ -6,13 +6,14 @@ class_name FoodSpawner extends Area3D
 @export var game:MainGame
 @export var food_type_group:ResourceGroup
 var food_types:Array[FoodType]
-var current_gravity_scale: float = 1.0
+@export var stage_manager:StageManager
 
 func _ready() -> void:
 	food_type_group.load_all_into(food_types)
 	spawn_timer.timeout.connect(_spawn_food)
-	# Add to group so stage manager can find us
-	add_to_group("food_spawner")
+	stage_manager.stage_changed.connect(func(level:int, stage:Stage):
+		spawn_timer.wait_time = stage.spawn_time / max(1,level/stage_manager.stages.size())
+	)
 
 func _spawn_food() -> void:
 	var food:Food = FoodScene.instantiate() as Food
@@ -20,7 +21,7 @@ func _spawn_food() -> void:
 	food.position = _get_spawnpoint()
 	
 	# Apply current gravity scale to the food
-	food.gravity_scale = current_gravity_scale
+	food.gravity_scale = stage_manager.stage.gravity_scale
 	
 	food.hit_floor.connect(func():
 		if food.type.points > 0:
@@ -40,8 +41,3 @@ func _get_spawnpoint() -> Vector3:
 	# Offset it by the shape's position
 	point += spawn_area.global_position
 	return point
-
-# Updated method for stage manager to update both spawn interval and gravity
-func update_spawn_settings(new_interval: float, gravity_scale: float) -> void:
-	spawn_timer.wait_time = new_interval
-	current_gravity_scale = gravity_scale

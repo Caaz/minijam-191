@@ -15,6 +15,7 @@ const MAX_STRIKES:int = 3
 @export var ground_spawner: GroundSpawner
 
 @export var custom_grid_map: CustomGridMap
+@export var stage_manager:StageManager
 
 var current_upgrade_mode: GlobalData.CrateUpgrade = GlobalData.CrateUpgrade.NONE:
 	set(new_upgrade_mode):
@@ -31,7 +32,6 @@ var selected_crate:Crate
 var crate_cost: int = 2:
 	set(new_cost):
 		crate_cost = new_cost
-		#ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
 
 var score:int = 0:
 	set(new_score):
@@ -52,13 +52,12 @@ var elapsed_seconds: float = 0:
 	set(new_seconds):
 		elapsed_seconds = new_seconds
 		if _seconds != floor(elapsed_seconds):
+			_seconds = floor(elapsed_seconds)
 			seconds_changed.emit(elapsed_seconds)
 
 func _ready() -> void:
-	custom_grid_map.create_square(Vector3i(0,0,0), 8)
 	process_mode = Node.PROCESS_MODE_DISABLED
 	ui.hide()
-	#ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
 	ui.buy_crate_button.pressed.connect(func():
 		if score >= crate_cost:
 			score -= crate_cost
@@ -66,17 +65,35 @@ func _ready() -> void:
 		)
 	ui.upgrade_crate_speed_button.pressed.connect(func():
 		current_upgrade_mode = GlobalData.CrateUpgrade.SPEED
-		)
+	)
 
 func _process(delta:float) -> void:
 	elapsed_seconds += delta
-	
+
+func initialize() -> void:
+	custom_grid_map.create_square(Vector3i(0,0,0), 8)
+	ui.hide()
+	score = 0
+	elapsed_seconds = 0
+	strikes = 0
+	for crate in get_tree().get_nodes_in_group(&"crate"):
+		crate.queue_free()
+	for food in get_tree().get_nodes_in_group(&"food"):
+		food.queue_free()
+		
+	stage_manager.reset()
+
 func start() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
+	initialize()
 	add_crate()
 	ui.show()
 	$BackgroundMusic.play()
-	
+
+func stop():
+	$BackgroundMusic.stop()
+	process_mode = Node.PROCESS_MODE_DISABLED
+
 func add_crate() -> void:
 	$SelectSound.play()
 	var crate:Crate = ground_spawner.spawn_crate()
@@ -91,7 +108,6 @@ func _on_food_caught(food:Food):
 		strikes+=1
 
 func _on_crate_selected(crate:Crate):
-	print("crate selected ", crate)
 	selected_crate = crate
 	selected_crate.new_path()
 

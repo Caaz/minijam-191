@@ -8,6 +8,7 @@ class_name GameplayUI extends Control
 @export var upgrade_crate_speed_button: Button
 @export var strike_container:Control
 @export var strike_texture:Texture2D
+@export var stage_manager:StageManager
 
 func _ready() -> void:
 	game.score_changed.connect(func(new_score:int):
@@ -18,13 +19,15 @@ func _ready() -> void:
 		add_strike_display()
 		
 	game.strikes_changed.connect(func(strike_count:int):
-		if strike_count >= strike_container.get_child_count():
-			return
-		var strike:Node = strike_container.get_child(strike_count)
-		strike.visible = true
+		for strike_display in strike_container.get_children():
+			strike_display.visible =  strike_display.get_index() < strike_count
 	)
 	game.seconds_changed.connect(func(seconds:float):
 		time_label.text = "Time: %02d:%02d" % [floor(seconds/60), (fmod(seconds, 60))]
+	)
+	stage_manager.stage_changed.connect(func(level:int, stage:Stage):
+		stage_label.visible = true
+		stage_label.text = "Level %d\n%s" % [level, stage.stage_name]
 	)
 
 func add_strike_display():
@@ -33,10 +36,6 @@ func add_strike_display():
 	strike.texture = strike_texture
 	strike.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 	strike_container.add_child(strike)
-
-func _on_stage_manager_stage_changed(_new_stage: int, description: String) -> void:
-	stage_label.visible = true
-	stage_label.text = description
 
 func _input(event: InputEvent) -> void:
 	if game.current_upgrade_mode == GlobalData.CrateUpgrade.NONE:

@@ -19,7 +19,7 @@ shader_parameter/icon = ExtResource("3_ymw4n")
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pgyaf"]
 size = Vector2(128, 128)
 
-[node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape", "drop_indicator")]
+[node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape", "drop_indicator") groups=["food"]]
 collision_layer = 6
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_jvm58")
@@ -37,6 +37,7 @@ shape = SubResource("SphereShape3D_o4lbg")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="DropIndicator" type="Sprite3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 top_level = true
 material_override = SubResource("ShaderMaterial_ymw4n")
 axis = 1
