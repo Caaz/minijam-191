@@ -17,15 +17,7 @@ const MAX_STRIKES:int = 3
 @export var custom_grid_map: CustomGridMap
 @export var stage_manager:StageManager
 
-var current_upgrade_mode: GlobalData.UpgradeMode = GlobalData.UpgradeMode.NONE:
-	set(new_upgrade_mode):
-		current_upgrade_mode = new_upgrade_mode
-		if new_upgrade_mode == GlobalData.UpgradeMode.NONE:
-			process_mode = Node.PROCESS_MODE_INHERIT
-		else:
-			process_mode = Node.PROCESS_MODE_DISABLED
-	get():
-		return current_upgrade_mode
+var current_upgrade_mode: GlobalData.UpgradeMode = GlobalData.UpgradeMode.NONE
 
 ## Current selected crate
 var selected_crate:Crate
@@ -119,6 +111,18 @@ func _on_food_caught(food:Food):
 func _on_crate_selected(crate:Crate):
 	selected_crate = crate
 	selected_crate.new_path()
+	
+	if current_upgrade_mode == GlobalData.UpgradeMode.NONE:
+		return
+	
+	crate.cost_label.hide()
+	
+	var upgrade_cost = crate.get_upgrade_cost(current_upgrade_mode)
+	if upgrade_cost <= score and upgrade_cost >= 0:
+		crate.upgrade(current_upgrade_mode)
+		score -= upgrade_cost
+	ui.disable_all_upgrade_buttons()
+		
 
 func _input(event:InputEvent):
 	if not selected_crate:

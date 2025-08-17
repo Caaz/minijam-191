@@ -5,6 +5,7 @@ signal caught(food:Food)
 @export var PathScene:PackedScene
 @export var selection_ui:Sprite3D
 @export var catching_area:Area3D
+@export var cost_label:Label3D
 
 var path:Path
 var speed:float = 10
@@ -24,6 +25,8 @@ var is_selected:bool = false:
 			selection_ui.hide()
 
 func _ready() -> void:
+	mouse_entered.connect(cost_label.show)
+	mouse_exited.connect(cost_label.hide)
 	catching_area.body_entered.connect(func(body:Node3D):
 		var food:Food = body as Food
 		if not food or food.type.points <= 0:

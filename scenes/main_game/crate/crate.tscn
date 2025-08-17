@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bl8moy187rtp4"]
+[gd_scene load_steps=9 format=3 uid="uid://bl8moy187rtp4"]
 
 [ext_resource type="Script" uid="uid://cyrv6psms2wge" path="res://scenes/main_game/crate/crate.gd" id="1_j1jke"]
 [ext_resource type="ArrayMesh" uid="uid://cu3y2b7wxlyq3" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/crate.obj" id="1_jpei4"]
 [ext_resource type="PackedScene" uid="uid://bnhhkhevlvw3" path="res://scenes/main_game/path/path.tscn" id="2_chisc"]
 [ext_resource type="Texture2D" uid="uid://dei2e7m58npy8" path="res://assets/kenney-ui-pack/Vector/Grey/icon_outline_square.svg" id="3_3v208"]
+[ext_resource type="FontFile" uid="uid://b28hbwju8xmrs" path="res://assets/Chubby Thumbs.ttf" id="5_hd362"]
+[ext_resource type="Script" uid="uid://de7nyc5lfinx" path="res://scenes/main_game/crate/cost_label.gd" id="7_uy53s"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j1jke"]
 points = PackedVector3Array(-0.97077, 0.00252741, -0.97077, 0.975233, 0.792946, 0.975258, -0.975258, 0.792946, 0.975258, -0.975258, 0.792946, -0.975258, 0.975233, 0.792946, -0.975258, 0.970746, 0.00252741, 0.97077, -0.97077, 0.00252741, 0.97077, 0.970746, 0.00252741, -0.97077)
@@ -11,7 +13,7 @@ points = PackedVector3Array(-0.97077, 0.00252741, -0.97077, 0.975233, 0.792946, 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o135h"]
 size = Vector3(1.5, 0.684082, 1.5)
 
-[node name="Crate" type="CharacterBody3D" node_paths=PackedStringArray("selection_ui", "catching_area") groups=["crate"]]
+[node name="Crate" type="CharacterBody3D" node_paths=PackedStringArray("selection_ui", "catching_area", "cost_label") groups=["crate"]]
 collision_layer = 2
 collision_mask = 3
 axis_lock_linear_y = true
@@ -22,6 +24,20 @@ script = ExtResource("1_j1jke")
 PathScene = ExtResource("2_chisc")
 selection_ui = NodePath("SelectionUI")
 catching_area = NodePath("CatchingArea")
+cost_label = NodePath("Label3D")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.905, 0)
+visible = false
+billboard = 1
+texture_filter = 1
+modulate = Color(0.392157, 0.85098, 0.780392, 1)
+outline_modulate = Color(0.161476, 0.163508, 0.153314, 1)
+text = "Cost: 1"
+font = ExtResource("5_hd362")
+font_size = 274
+outline_size = 127
+script = ExtResource("7_uy53s")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
@@ -48,12 +64,3 @@ input_ray_pickable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CatchingArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.457589, 0)
 shape = SubResource("BoxShape3D_o135h")
-
-[node name="PausedSelectionArea" type="Area3D" parent="."]
-process_mode = 3
-collision_layer = 4
-input_ray_pickable = false
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="PausedSelectionArea"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_j1jke")

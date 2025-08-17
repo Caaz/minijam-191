@@ -95,7 +95,7 @@ size = Vector3(29.9883, 0.001, 30.1721)
 [sub_resource type="Resource" id="Resource_s87mg"]
 script = ExtResource("11_irrf2")
 time = 30
-stage_name = "The Basics"
+stage_name = "Catch the Food!"
 gravity_scale = 0.5
 spawn_time = 5.0
 music = ExtResource("11_fetp2")
@@ -105,7 +105,7 @@ metadata/_custom_type_script = "uid://byftv7ev26bdr"
 
 [sub_resource type="Resource" id="Resource_ebk6p"]
 script = ExtResource("11_irrf2")
-time = 10
+time = 30
 stage_name = "Hungry for More?"
 gravity_scale = 0.75
 spawn_time = 4.0
@@ -127,7 +127,7 @@ metadata/_custom_type_script = "uid://byftv7ev26bdr"
 
 [sub_resource type="Resource" id="Resource_l774p"]
 script = ExtResource("11_irrf2")
-time = 10
+time = 20
 stage_name = "Hot enough for you?"
 gravity_scale = 1.0
 spawn_time = 2.0
@@ -138,12 +138,12 @@ metadata/_custom_type_script = "uid://byftv7ev26bdr"
 
 [sub_resource type="Resource" id="Resource_r8wn4"]
 script = ExtResource("11_irrf2")
-time = 25
-stage_name = "Let's go!"
+time = 10
+stage_name = "Lets go!"
 gravity_scale = 1.0
 spawn_time = 1.0
 music = ExtResource("14_r8wn4")
-chance_of_multiple_spawn = 30.0
+chance_of_multiple_spawn = 15.0
 max_multiple_spawn_num = 2
 metadata/_custom_type_script = "uid://byftv7ev26bdr"
 
