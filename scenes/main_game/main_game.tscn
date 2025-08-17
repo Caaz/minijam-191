@@ -138,10 +138,10 @@ script = ExtResource("11_irrf2")
 time = 20
 stage_name = "Hot enough for you?"
 gravity_scale = 1.0
-spawn_time = 2.0
+spawn_time = 3.0
 music = ExtResource("14_r8wn4")
 chance_of_multiple_spawn = 25.0
-max_multiple_spawn_num = 2
+max_multiple_spawn_num = 1
 metadata/_custom_type_script = "uid://byftv7ev26bdr"
 
 [sub_resource type="Resource" id="Resource_r8wn4"]
@@ -149,7 +149,7 @@ script = ExtResource("11_irrf2")
 time = 10
 stage_name = "Lets go!"
 gravity_scale = 1.0
-spawn_time = 1.0
+spawn_time = 3.0
 music = ExtResource("14_r8wn4")
 chance_of_multiple_spawn = 15.0
 max_multiple_spawn_num = 2
@@ -258,7 +258,7 @@ background_music = NodePath("../BackgroundMusic")
 stream = ExtResource("11_fetp2")
 volume_db = -5.333
 
-[node name="GoodSound" type="AudioStreamPlayer" parent="."]
+[node name="GoodSound" type="AudioStreamPlayer" parent="." groups=["sfx"]]
 stream = ExtResource("12_b4n6q")
 
 [node name="BadSound" type="AudioStreamPlayer" parent="." groups=["sfx"]]
@@ -294,3 +294,5 @@ volume_db = -10.0
 [node name="UpgradeCrateSizeSFX" type="AudioStreamPlayer" parent="." groups=["sfx"]]
 stream = ExtResource("26_fm6xj")
 volume_db = -10.0
+
+[node name="FoodCaughtSFX" type="AudioStreamPlayer" parent="." groups=["sfx"]]

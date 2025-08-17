@@ -54,6 +54,7 @@ var elapsed_seconds: float = 0:
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
+	initialize()
 	ui.hide()
 	ui.buy_crate_button.pressed.connect(func():
 		if score >= crate_cost:
@@ -112,15 +113,9 @@ func _on_food_caught(food:Food):
 		score += food.type.points
 		if food.type.collect_sounds.size() > 0:
 			var stream: AudioStream = food.type.collect_sounds.pick_random()
-			var audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
+			var audio_player: AudioStreamPlayer = $FoodCaughtSFX as AudioStreamPlayer
 			audio_player.stream = stream
-			audio_player.autoplay = true
-			audio_player.finished.connect(func():
-				audio_player.queue_free()
-				)
-			audio_player.add_to_group("sfx")
 			audio_player.volume_linear = GlobalData.settings_values["sfx_volume_linear"]
-			add_child(audio_player)
 	else:
 		strikes+=1
 
