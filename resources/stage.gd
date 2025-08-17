@@ -9,3 +9,5 @@ class_name Stage extends Resource
 ## Rate at which food is spawned.
 @export var spawn_time:float = 2.0
 @export var music:AudioStream
+@export var chance_of_multiple_spawn: float = 10
+@export var max_multiple_spawn_num: int = 2
