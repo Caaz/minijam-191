@@ -8,3 +8,4 @@ class_name Stage extends Resource
 @export var gravity_scale:float = 1.0
 ## Rate at which food is spawned.
 @export var spawn_time:float = 2.0
+@export var music:AudioStream

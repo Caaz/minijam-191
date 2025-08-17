@@ -27,6 +27,15 @@ func _ready() -> void:
 		food.queue_free()
 	)
 
+func get_upgrade_cost(upgrade_mode: GlobalData.CrateUpgrade) -> int:
+	if upgrade_mode == GlobalData.CrateUpgrade.SPEED:
+		return 2
+	return 0
+
+func upgrade(upgrade_mode: GlobalData.CrateUpgrade):
+	if upgrade_mode == GlobalData.CrateUpgrade.SPEED:
+		speed += 5
+	
 func _input_event(_camera: Camera3D, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event.is_action_pressed(&"select"):
 		is_selected = true

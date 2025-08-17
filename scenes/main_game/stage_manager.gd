@@ -4,11 +4,16 @@ signal stage_changed(level: int, stage: Stage)
 
 @export var stages:Array[Stage]
 @export var game:MainGame
+@export var background_music:AudioStreamPlayer
 var stage:Stage:
 	set(new_stage):
 		stage = new_stage
 		_stage_time_remaining = stage.time
 		stage_changed.emit(_level, stage)
+		$"../MusStinger".play()
+		if background_music.stream != stage.music:
+			background_music.stream = stage.music
+			background_music.play()
 
 var _level:int = -1:
 	set(new_index):

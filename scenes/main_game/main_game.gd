@@ -10,18 +10,28 @@ const MAX_STRIKES:int = 3
 @export var camera:Camera3D
 ## This node handles raycasts for clicks, because I don't want to bother with managing all the raycast code for doing this manually.
 @export var click_raycast:RayCast3D
+@export var click_raycast_crates:RayCast3D
 @export var ui:GameplayUI
 @export var ground_spawner: GroundSpawner
 
 @export var custom_grid_map: CustomGridMap
 @export var stage_manager:StageManager
 
+var current_upgrade_mode: GlobalData.CrateUpgrade = GlobalData.CrateUpgrade.NONE:
+	set(new_upgrade_mode):
+		current_upgrade_mode = new_upgrade_mode
+		if new_upgrade_mode == GlobalData.CrateUpgrade.NONE:
+			process_mode = Node.PROCESS_MODE_INHERIT
+		else:
+			process_mode = Node.PROCESS_MODE_DISABLED
+	get():
+		return current_upgrade_mode
+
 ## Current selected crate
 var selected_crate:Crate
 var crate_cost: int = 2:
 	set(new_cost):
 		crate_cost = new_cost
-		ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
 
 var score:int = 0:
 	set(new_score):
@@ -30,6 +40,8 @@ var score:int = 0:
 
 var strikes: int = 0:
 	set(new_strikes):
+		if new_strikes > strikes:
+			$BadSound.play()
 		strikes = new_strikes
 		strikes_changed.emit(strikes)
 		if strikes >= MAX_STRIKES:
@@ -46,11 +58,13 @@ var elapsed_seconds: float = 0:
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
 	ui.hide()
-	ui.buy_crate_button.text = "Buy Crate (" + str(crate_cost) + " Points)"
 	ui.buy_crate_button.pressed.connect(func():
 		if score >= crate_cost:
 			score -= crate_cost
 			add_crate()
+		)
+	ui.upgrade_crate_speed_button.pressed.connect(func():
+		current_upgrade_mode = GlobalData.CrateUpgrade.SPEED
 	)
 
 func _process(delta:float) -> void:
@@ -87,15 +101,17 @@ func add_crate() -> void:
 	crate.caught.connect(_on_food_caught)
 
 func _on_food_caught(food:Food):
-	score += food.type.points
-	$GoodSound.play()
+	if food.type.points > 0:
+		score += food.type.points
+		$GoodSound.play()
+	else:
+		strikes+=1
 
 func _on_crate_selected(crate:Crate):
 	selected_crate = crate
 	selected_crate.new_path()
 
 func _input(event:InputEvent):
-	
 	if not selected_crate:
 		return
 		
@@ -116,5 +132,4 @@ func _input(event:InputEvent):
 	click_raycast.force_raycast_update()
 	if not click_raycast.is_colliding():
 		return
-		
 	selected_crate.path.add_point(click_raycast.get_collision_point())

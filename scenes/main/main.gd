@@ -21,6 +21,7 @@ func _ready() -> void:
 	lose_screen.reset_button.pressed.connect(func():
 		lose_screen.hide()
 		$EndGameMusic.stop()
+		$MainMenuMusic.play()
 		main_menu.show()
 		main_game.initialize()
 	)

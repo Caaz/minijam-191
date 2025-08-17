@@ -11,8 +11,8 @@ var food_types:Array[FoodType]
 func _ready() -> void:
 	food_type_group.load_all_into(food_types)
 	spawn_timer.timeout.connect(_spawn_food)
-	stage_manager.stage_changed.connect(func(_level:int, stage:Stage):
-		spawn_timer.wait_time = stage.spawn_time
+	stage_manager.stage_changed.connect(func(level:int, stage:Stage):
+		spawn_timer.wait_time = stage.spawn_time / max(1,level/stage_manager.stages.size())
 	)
 
 func _spawn_food() -> void:
@@ -24,8 +24,8 @@ func _spawn_food() -> void:
 	food.gravity_scale = stage_manager.stage.gravity_scale
 	
 	food.hit_floor.connect(func():
-		game.strikes += 1
-		$"../BadSound".play()
+		if food.type.points > 0:
+			game.strikes += 1
 	)
 	add_child(food)
 	
