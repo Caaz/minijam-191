@@ -5,11 +5,13 @@ signal hit_floor()
 @export var mesh_instance:MeshInstance3D
 @export var collision_shape:CollisionShape3D
 @export var drop_indicator:Sprite3D
+@export var explosion:GPUParticles3D
 
 var sprite:Sprite3D
 var progress_circle:Sprite3D
 var initial_height:float
 var drop_material:ShaderMaterial
+
 
 func _ready() -> void:
 	mesh_instance.mesh = type.mesh
@@ -22,12 +24,25 @@ func _ready() -> void:
 
 func _physics_process(_delta) -> void:
 	# Update progress circle based on height
-	var progress = 1.0 - clamp(global_position.y / initial_height, 0.0, 1.0)
-	drop_material.set_shader_parameter('amount', progress)
+	if drop_indicator:
+		var progress = 1.0 - clamp(global_position.y / initial_height, 0.0, 1.0)
+		drop_material.set_shader_parameter('amount', progress)
 
-	# Check for floor collision
+		
 	var bodies:Array[Node3D] = get_colliding_bodies()
-	if bodies.size() > 0:
-		if bodies[0].is_in_group(&"floor"):
-			hit_floor.emit()
-			queue_free()
+	for body:Node3D in bodies:
+		if body.is_in_group(&"floor"):
+			if type.splats:
+				queue_free()
+				hit_floor.emit()
+			elif drop_indicator:
+				drop_indicator.queue_free()
+		
+		if type.explodes and body is Crate:
+			body.destroy()
+			explode()
+	
+func explode() -> void:
+	explosion.emitting = true
+	mesh_instance.hide()
+	explosion.finished.connect(queue_free)

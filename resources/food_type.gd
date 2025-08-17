@@ -9,5 +9,6 @@ class_name FoodType extends Resource
 @export var name:String
 @export var points:int = 1
 @export var fall_speed:float = 1
-
+@export var splats:bool = true
+@export var explodes:bool = false
 var collision_shape:ConvexPolygonShape3D

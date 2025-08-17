@@ -26,7 +26,7 @@ var is_selected:bool = false:
 func _ready() -> void:
 	catching_area.body_entered.connect(func(body:Node3D):
 		var food:Food = body as Food
-		if not food:
+		if not food or food.type.points <= 0:
 			return
 		
 		caught.emit(food)
@@ -72,3 +72,7 @@ func _physics_process(delta:float) -> void:
 	#position = target
 	if not is_selected and is_equal_approx(path.follower.progress_ratio, 1.0):
 		path.queue_free()
+
+func destroy() -> void:
+#	Maybe do another particle explosion here I donno
+	queue_free()

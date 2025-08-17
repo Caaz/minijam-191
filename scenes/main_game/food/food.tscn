@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://chihdjvv7b61o"]
+[gd_scene load_steps=15 format=3 uid="uid://chihdjvv7b61o"]
 
 [ext_resource type="Script" uid="uid://bs6b7ptrf4rjp" path="res://scenes/main_game/food/food.gd" id="1_77ovl"]
 [ext_resource type="Shader" uid="uid://c10rmkkg8i50d" path="res://shaders/radial-timer.gdshader" id="2_l7gct"]
@@ -19,17 +19,48 @@ shader_parameter/icon = ExtResource("3_ymw4n")
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_pgyaf"]
 size = Vector2(128, 128)
 
-[node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape", "drop_indicator") groups=["food"]]
+[sub_resource type="Gradient" id="Gradient_ymw4n"]
+offsets = PackedFloat32Array(0.165939, 0.279476, 0.388646, 0.471616, 0.639738)
+colors = PackedColorArray(0.82, 0, 0.0136665, 1, 0.9868, 0.324333, 0.00100221, 1, 1, 0.35, 0, 1, 1, 0.762975, 0, 1, 1, 0.8, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pgyaf"]
+gradient = SubResource("Gradient_ymw4n")
+
+[sub_resource type="Curve" id="Curve_6613y"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0142857, 1), 0.0, 0.0, 0, 0, Vector2(0.128571, 0.521053), 0.0, 0.0, 0, 0, Vector2(0.365306, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_xx1v5"]
+curve = SubResource("Curve_6613y")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lp4pp"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -4.9, 0)
+scale_curve = SubResource("CurveTexture_xx1v5")
+color_ramp = SubResource("GradientTexture1D_pgyaf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixc76"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.621524, 0.621524, 0.621524, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xfkdm"]
+material = SubResource("StandardMaterial3D_ixc76")
+
+[node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape", "drop_indicator", "explosion") groups=["food"]]
 collision_layer = 6
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_jvm58")
 gravity_scale = 0.5
 contact_monitor = true
-max_contacts_reported = 1
+max_contacts_reported = 2
 script = ExtResource("1_77ovl")
 mesh_instance = NodePath("MeshInstance3D")
 collision_shape = NodePath("CollisionShape3D")
 drop_indicator = NodePath("DropIndicator")
+explosion = NodePath("GPUParticles3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_o4lbg")
@@ -42,3 +73,12 @@ top_level = true
 material_override = SubResource("ShaderMaterial_ymw4n")
 axis = 1
 texture = SubResource("PlaceholderTexture2D_pgyaf")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_lp4pp")
+draw_pass_1 = SubResource("SphereMesh_xfkdm")
