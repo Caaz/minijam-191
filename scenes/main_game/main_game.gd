@@ -41,7 +41,12 @@ var score:int = 0:
 var strikes: int = 0:
 	set(new_strikes):
 		if new_strikes > strikes:
-			$BadSound.play()
+			if new_strikes == 1:
+				$Strike1SFX.play()
+			elif new_strikes == 2:
+				$Strike2SFX.play()
+			elif new_strikes >= 3:
+				$Strike3SFX.play()
 		strikes = new_strikes
 		strikes_changed.emit(strikes)
 		if strikes >= MAX_STRIKES:

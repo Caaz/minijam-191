@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://c10jxpa1iidnd"]
+[gd_scene load_steps=42 format=4 uid="uid://c10jxpa1iidnd"]
 
 [ext_resource type="Script" uid="uid://bo1xh0uxn0hje" path="res://scenes/main_game/main_game.gd" id="1_i3kwu"]
 [ext_resource type="PackedScene" uid="uid://bl8moy187rtp4" path="res://scenes/main_game/crate/crate.tscn" id="2_mijjq"]
@@ -21,6 +21,9 @@
 [ext_resource type="AudioStream" uid="uid://b48mcbmoigxr6" path="res://assets/sounds/upgrade_sounds/SFX_Upgrade_AddCrate_1.ogg" id="19_fxa2l"]
 [ext_resource type="AudioStream" uid="uid://g2al0xv7u3eu" path="res://assets/sounds/upgrade_sounds/SFX_Upgrade_AddCrate_2.ogg" id="20_feobv"]
 [ext_resource type="AudioStream" uid="uid://i7ktmdleql5j" path="res://assets/sounds/upgrade_sounds/SFX_Upgrade_AddCrate_3.ogg" id="21_gxjft"]
+[ext_resource type="AudioStream" uid="uid://d3aa2rlicecl8" path="res://assets/sounds/SFX_Strike_1.ogg" id="22_feobv"]
+[ext_resource type="AudioStream" uid="uid://0j4dob5ow3w2" path="res://assets/sounds/SFX_Strike_2.ogg" id="23_uddg2"]
+[ext_resource type="AudioStream" uid="uid://w3s3833dqex7" path="res://assets/sounds/SFX_Strike_3.ogg" id="24_qspar"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa35d"]
 resource_name = "restaurant"
@@ -267,4 +270,17 @@ stream = SubResource("AudioStreamRandomizer_ebk6p")
 
 [node name="AddCrateSFX" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_uddg2")
+volume_db = -10.0
+
+[node name="Strike1SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_feobv")
+volume_db = -10.0
+
+[node name="Strike2SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_uddg2")
+volume_db = -10.0
+
+[node name="Strike3SFX" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("24_qspar")
 volume_db = -10.0
