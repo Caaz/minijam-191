@@ -61,7 +61,7 @@ func _ready() -> void:
 	ui.buy_crate_button.pressed.connect(func():
 		if score >= crate_cost:
 			score -= crate_cost
-			add_crate()
+			add_crate(true)
 		)
 	ui.upgrade_crate_speed_button.toggled.connect(func(toggled_on: bool):
 		if toggled_on:
@@ -95,7 +95,7 @@ func initialize() -> void:
 func start() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
 	initialize()
-	add_crate()
+	add_crate(false)
 	ui.show()
 	$BackgroundMusic.play()
 
@@ -103,8 +103,9 @@ func stop():
 	$BackgroundMusic.stop()
 	process_mode = Node.PROCESS_MODE_DISABLED
 
-func add_crate() -> void:
-	$SelectSound.play()
+func add_crate(with_sound: bool) -> void:
+	if with_sound:
+		$AddCrateSFX.play()
 	var crate:Crate = ground_spawner.spawn_crate()
 	crate.selected.connect(_on_crate_selected.bind(crate))
 	crate.caught.connect(_on_food_caught)

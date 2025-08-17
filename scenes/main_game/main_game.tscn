@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://c10jxpa1iidnd"]
+[gd_scene load_steps=39 format=4 uid="uid://c10jxpa1iidnd"]
 
 [ext_resource type="Script" uid="uid://bo1xh0uxn0hje" path="res://scenes/main_game/main_game.gd" id="1_i3kwu"]
 [ext_resource type="PackedScene" uid="uid://bl8moy187rtp4" path="res://scenes/main_game/crate/crate.tscn" id="2_mijjq"]
@@ -18,6 +18,9 @@
 [ext_resource type="AudioStream" uid="uid://pi7ypjobh16g" path="res://assets/sounds/SFX_UI_Select.ogg" id="14_4y18v"]
 [ext_resource type="AudioStream" uid="uid://ckivgpk7iqwkj" path="res://assets/sounds/MUS_Hard.ogg" id="14_r8wn4"]
 [ext_resource type="AudioStream" uid="uid://7jd5hyag1w25" path="res://assets/sounds/MUS_Stinger.ogg" id="16_s87mg"]
+[ext_resource type="AudioStream" uid="uid://b48mcbmoigxr6" path="res://assets/sounds/upgrade_sounds/SFX_Upgrade_AddCrate_1.ogg" id="19_fxa2l"]
+[ext_resource type="AudioStream" uid="uid://g2al0xv7u3eu" path="res://assets/sounds/upgrade_sounds/SFX_Upgrade_AddCrate_2.ogg" id="20_feobv"]
+[ext_resource type="AudioStream" uid="uid://i7ktmdleql5j" path="res://assets/sounds/upgrade_sounds/SFX_Upgrade_AddCrate_3.ogg" id="21_gxjft"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa35d"]
 resource_name = "restaurant"
@@ -152,6 +155,12 @@ random_pitch = 1.5
 streams_count = 1
 stream_0/stream = ExtResource("16_s87mg")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uddg2"]
+streams_count = 3
+stream_0/stream = ExtResource("19_fxa2l")
+stream_1/stream = ExtResource("20_feobv")
+stream_2/stream = ExtResource("21_gxjft")
+
 [node name="MainGame" type="Node3D" node_paths=PackedStringArray("camera", "click_raycast", "click_raycast_crates", "ui", "ground_spawner", "custom_grid_map", "stage_manager")]
 script = ExtResource("1_i3kwu")
 CrateScene = ExtResource("2_mijjq")
@@ -255,3 +264,7 @@ stream = ExtResource("14_4y18v")
 
 [node name="MusStinger" type="AudioStreamPlayer" parent="." groups=["sfx"]]
 stream = SubResource("AudioStreamRandomizer_ebk6p")
+
+[node name="AddCrateSFX" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_uddg2")
+volume_db = -10.0
