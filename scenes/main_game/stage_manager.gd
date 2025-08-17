@@ -11,9 +11,11 @@ var stage:Stage:
 		_stage_time_remaining = stage.time
 		stage_changed.emit(_level, stage)
 		$"../MusStinger".play()
+		var was_playing:bool = background_music.playing
 		if background_music.stream != stage.music:
 			background_music.stream = stage.music
-			background_music.play()
+			if was_playing:
+				background_music.play()
 
 var _level:int = -1:
 	set(new_index):

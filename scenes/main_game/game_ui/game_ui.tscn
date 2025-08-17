@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ddc4jjhtow8bp"]
+[gd_scene load_steps=8 format=3 uid="uid://ddc4jjhtow8bp"]
 
 [ext_resource type="Script" uid="uid://p0c0chjrgtc1" path="res://scenes/main_game/game_ui/game_ui.gd" id="1_p5s7u"]
 [ext_resource type="LabelSettings" uid="uid://b02px5y2os0hw" path="res://resources/default_labelsettings.tres" id="2_p5s7u"]
@@ -7,8 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://7i6asgwo87bo" path="res://assets/ui-icons/plus/plus-symbol-button.png" id="5_hcj8c"]
 [ext_resource type="Texture2D" uid="uid://7s5q83132wn5" path="res://assets/ui-icons/speed/lightning.png" id="6_jgttn"]
 [ext_resource type="Texture2D" uid="uid://blavxwiyh1og7" path="res://assets/ui-icons/size/expansion.png" id="7_8c1ku"]
-[ext_resource type="AudioStream" uid="uid://cmxf3y73inhcf" path="res://assets/sounds/upgrade_sounds/SFX_Upgrade_Speed_1.ogg" id="8_46g7b"]
-[ext_resource type="AudioStream" uid="uid://bnay341mwi4u1" path="res://assets/sounds/upgrade_sounds/SFX_Upgrade_Size_1.ogg" id="9_p2h6p"]
 
 [node name="GameplayUI" type="Control" node_paths=PackedStringArray("score_label", "time_label", "stage_label", "buy_crate_button", "upgrade_crate_speed_button", "upgrade_crate_size_button", "strike_container")]
 layout_mode = 3
@@ -38,53 +36,7 @@ grow_vertical = 2
 ratio = 1.7778
 
 [node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 2
-auto_translate_mode = 0
-editor_description = ""
-visible = true
-modulate = Color(1, 1, 1, 1)
-self_modulate = Color(1, 1, 1, 1)
-show_behind_parent = false
-top_level = false
-clip_children = 0
-light_mask = 1
-visibility_layer = 1
-z_index = 0
-z_as_relative = true
-y_sort_enabled = false
-texture_filter = 0
-texture_repeat = 0
-material = null
-use_parent_material = false
-clip_contents = false
-custom_minimum_size = Vector2(0, 0)
-layout_direction = 0
 layout_mode = 2
-size_flags_horizontal = 1
-size_flags_vertical = 1
-size_flags_stretch_ratio = 1.0
-localize_numeral_system = true
-tooltip_text = ""
-tooltip_auto_translate_mode = 0
-focus_neighbor_left = NodePath("")
-focus_neighbor_top = NodePath("")
-focus_neighbor_right = NodePath("")
-focus_neighbor_bottom = NodePath("")
-focus_next = NodePath("")
-focus_previous = NodePath("")
-focus_mode = 0
-mouse_filter = 1
-mouse_force_pass_scroll_events = true
-mouse_default_cursor_shape = 0
-theme = null
-theme_type_variation = &""
-script = null
 
 [node name="BoxContainer" type="BoxContainer" parent="AspectRatioContainer/MarginContainer"]
 layout_mode = 2
@@ -130,6 +82,7 @@ vertical = true
 
 [node name="BuyCrate" type="Button" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2"]
 layout_mode = 2
+tooltip_text = "Buy a new Crate (2 points)"
 icon = ExtResource("3_avg3y")
 
 [node name="Plus-symbol-button" type="Sprite2D" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2/BuyCrate"]
@@ -140,6 +93,8 @@ texture = ExtResource("5_hcj8c")
 
 [node name="UpgradeCrateSpeed" type="Button" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2"]
 layout_mode = 2
+tooltip_text = "Upgrade Crate Speed
+(Click a Crate afterwards!)"
 toggle_mode = true
 icon = ExtResource("3_avg3y")
 
@@ -150,6 +105,8 @@ texture = ExtResource("6_jgttn")
 
 [node name="UpgradeCrateSize" type="Button" parent="AspectRatioContainer/MarginContainer/BoxContainer/BoxContainer2"]
 layout_mode = 2
+tooltip_text = "Upgrade Crate Size
+(Click a Crate afterwards!)"
 toggle_mode = true
 icon = ExtResource("3_avg3y")
 
@@ -157,11 +114,3 @@ icon = ExtResource("3_avg3y")
 position = Vector2(54.5, 11.496)
 scale = Vector2(0.0292969, 0.0292969)
 texture = ExtResource("7_8c1ku")
-
-[node name="UpgradeCrateSpeedSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_p2h6p")
-volume_db = -10.0
-
-[node name="UpgradeCrateSizeSFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_46g7b")
-volume_db = -10.0

@@ -24,7 +24,7 @@ func _ready() -> void:
 				pass
 		)
 	stage_manager.stage_changed.connect(func(level:int, stage:Stage):
-		spawn_timer.wait_time = stage.spawn_time / max(1,level/stage_manager.stages.size())
+		spawn_timer.wait_time = stage.spawn_time / max(1,float(level)/float(stage_manager.stages.size()))
 	)
 
 func _spawn_food(gave_type: bool = false, gave_position: bool = false, given_type: FoodType = null, given_position: Vector3 = Vector3.INF) -> Food:

@@ -5,6 +5,7 @@ signal caught(food:Food)
 @export var PathScene:PackedScene
 @export var selection_ui:Sprite3D
 @export var catching_area:Area3D
+@export var cost_label:Label3D
 
 var path:Path
 var speed:float = 10
@@ -24,9 +25,11 @@ var is_selected:bool = false:
 			selection_ui.hide()
 
 func _ready() -> void:
+	mouse_entered.connect(cost_label.show)
+	mouse_exited.connect(cost_label.hide)
 	catching_area.body_entered.connect(func(body:Node3D):
 		var food:Food = body as Food
-		if not food:
+		if not food or food.type.points <= 0:
 			return
 		
 		caught.emit(food)
@@ -61,14 +64,19 @@ func _physics_process(delta:float) -> void:
 		return
 	
 	var target:Vector3 = position
-	path.follower.progress += delta * speed
 	target = path.follower.global_position
-	path.update_line_display()
 	if position.distance_to(target) > 0.5:
 		velocity = position.direction_to(target) * speed
 	else:
 		velocity = Vector3.ZERO
+		path.follower.progress += delta * speed * 2
+		path.update_line_display()
 	move_and_slide()
-	#position = target
+
 	if not is_selected and is_equal_approx(path.follower.progress_ratio, 1.0):
 		path.queue_free()
+		
+
+func destroy() -> void:
+#	Maybe do another particle explosion here I donno
+	queue_free()

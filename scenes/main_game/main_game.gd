@@ -17,15 +17,7 @@ const MAX_STRIKES:int = 3
 @export var custom_grid_map: CustomGridMap
 @export var stage_manager:StageManager
 
-var current_upgrade_mode: GlobalData.UpgradeMode = GlobalData.UpgradeMode.NONE:
-	set(new_upgrade_mode):
-		current_upgrade_mode = new_upgrade_mode
-		if new_upgrade_mode == GlobalData.UpgradeMode.NONE:
-			process_mode = Node.PROCESS_MODE_INHERIT
-		else:
-			process_mode = Node.PROCESS_MODE_DISABLED
-	get():
-		return current_upgrade_mode
+var current_upgrade_mode: GlobalData.UpgradeMode = GlobalData.UpgradeMode.NONE
 
 ## Current selected crate
 var selected_crate:Crate
@@ -62,6 +54,7 @@ var elapsed_seconds: float = 0:
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_DISABLED
+	initialize()
 	ui.hide()
 	ui.buy_crate_button.pressed.connect(func():
 		if score >= crate_cost:
@@ -120,21 +113,31 @@ func _on_food_caught(food:Food):
 		score += food.type.points
 		if food.type.collect_sounds.size() > 0:
 			var stream: AudioStream = food.type.collect_sounds.pick_random()
-			var audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
+			var audio_player: AudioStreamPlayer = $FoodCaughtSFX as AudioStreamPlayer
 			audio_player.stream = stream
-			audio_player.autoplay = true
-			audio_player.finished.connect(func():
-				audio_player.queue_free()
-				)
-			audio_player.add_to_group("sfx")
 			audio_player.volume_linear = GlobalData.settings_values["sfx_volume_linear"]
-			add_child(audio_player)
 	else:
 		strikes+=1
 
 func _on_crate_selected(crate:Crate):
 	selected_crate = crate
 	selected_crate.new_path()
+	
+	if current_upgrade_mode == GlobalData.UpgradeMode.NONE:
+		return
+	
+	crate.cost_label.hide()
+	
+	var upgrade_cost = crate.get_upgrade_cost(current_upgrade_mode)
+	if upgrade_cost <= score and upgrade_cost >= 0:
+		crate.upgrade(current_upgrade_mode)
+		score -= upgrade_cost
+		if current_upgrade_mode == GlobalData.UpgradeMode.CRATE_SPEED:
+			$UpgradeCrateSpeedSFX.play()
+		elif current_upgrade_mode == GlobalData.UpgradeMode.CRATE_SIZE:
+			$UpgradeCrateSizeSFX.play()
+	ui.disable_all_upgrade_buttons()
+		
 
 func _input(event:InputEvent):
 	if not selected_crate:

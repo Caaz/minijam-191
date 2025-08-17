@@ -11,3 +11,5 @@ icon = ExtResource("1_lim4n")
 name = "Bomb"
 points = -1
 fall_speed = 1.0
+splats = false
+explodes = true
