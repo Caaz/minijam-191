@@ -50,12 +50,13 @@ albedo_color = Color(0.621524, 0.621524, 0.621524, 1)
 material = SubResource("StandardMaterial3D_ixc76")
 
 [node name="Food" type="RigidBody3D" node_paths=PackedStringArray("mesh_instance", "collision_shape", "drop_indicator", "explosion") groups=["food"]]
-collision_layer = 6
-collision_mask = 3
+collision_layer = 4
+collision_mask = 7
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_jvm58")
 gravity_scale = 0.5
 can_sleep = false
+continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_77ovl")
