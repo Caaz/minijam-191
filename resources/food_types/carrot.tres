@@ -1,8 +1,11 @@
-[gd_resource type="Resource" script_class="FoodType" load_steps=4 format=3 uid="uid://cwf6mhddd2nn6"]
+[gd_resource type="Resource" script_class="FoodType" load_steps=7 format=3 uid="uid://cwf6mhddd2nn6"]
 
+[ext_resource type="AudioStream" uid="uid://drorvwg6q1ou5" path="res://assets/sounds/food_sounds/SFX_Carrot_Collect_1.ogg" id="1_4xtdd"]
 [ext_resource type="Texture2D" uid="uid://imbfmdiekmqh" path="res://assets/food-icon/carrot.png" id="1_54gyy"]
 [ext_resource type="ArrayMesh" uid="uid://dfytr8vymlldx" path="res://assets/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/food_ingredient_carrot.obj" id="1_gx8dv"]
 [ext_resource type="Script" uid="uid://l6skux8jjlap" path="res://resources/food_type.gd" id="1_v1ord"]
+[ext_resource type="AudioStream" uid="uid://bfhxjobo80hwj" path="res://assets/sounds/food_sounds/SFX_Carrot_Collect_2.ogg" id="2_1frew"]
+[ext_resource type="AudioStream" uid="uid://dt15sqsvqag7p" path="res://assets/sounds/food_sounds/SFX_Carrot_Impact.ogg" id="4_sporf"]
 
 [resource]
 script = ExtResource("1_v1ord")
@@ -11,4 +14,5 @@ icon = ExtResource("1_54gyy")
 name = "Carrot"
 points = 1
 fall_speed = 1.0
-metadata/_custom_type_script = "uid://l6skux8jjlap"
+collect_sounds = Array[AudioStream]([ExtResource("1_4xtdd"), ExtResource("2_1frew")])
+impact_sound = ExtResource("4_sporf")

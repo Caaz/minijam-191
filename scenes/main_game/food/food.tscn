@@ -54,6 +54,7 @@ collision_layer = 6
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_jvm58")
 gravity_scale = 0.5
+can_sleep = false
 contact_monitor = true
 max_contacts_reported = 2
 script = ExtResource("1_77ovl")

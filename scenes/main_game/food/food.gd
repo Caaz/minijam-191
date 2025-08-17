@@ -28,7 +28,6 @@ func _physics_process(_delta) -> void:
 		var progress = 1.0 - clamp(global_position.y / initial_height, 0.0, 1.0)
 		drop_material.set_shader_parameter('amount', progress)
 
-		
 	var bodies:Array[Node3D] = get_colliding_bodies()
 	for body:Node3D in bodies:
 		if body.is_in_group(&"floor"):

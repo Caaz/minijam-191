@@ -33,7 +33,12 @@ var score:int = 0:
 var strikes: int = 0:
 	set(new_strikes):
 		if new_strikes > strikes:
-			$BadSound.play()
+			if new_strikes == 1:
+				$Strike1SFX.play()
+			elif new_strikes == 2:
+				$Strike2SFX.play()
+			elif new_strikes >= 3:
+				$Strike3SFX.play()
 		strikes = new_strikes
 		strikes_changed.emit(strikes)
 		if strikes >= MAX_STRIKES:
@@ -53,7 +58,7 @@ func _ready() -> void:
 	ui.buy_crate_button.pressed.connect(func():
 		if score >= crate_cost:
 			score -= crate_cost
-			add_crate()
+			add_crate(true)
 		)
 	ui.upgrade_crate_speed_button.toggled.connect(func(toggled_on: bool):
 		if toggled_on:
@@ -87,7 +92,7 @@ func initialize() -> void:
 func start() -> void:
 	process_mode = Node.PROCESS_MODE_INHERIT
 	initialize()
-	add_crate()
+	add_crate(false)
 	ui.show()
 	$BackgroundMusic.play()
 
@@ -95,8 +100,9 @@ func stop():
 	$BackgroundMusic.stop()
 	process_mode = Node.PROCESS_MODE_DISABLED
 
-func add_crate() -> void:
-	$SelectSound.play()
+func add_crate(with_sound: bool) -> void:
+	if with_sound:
+		$AddCrateSFX.play()
 	var crate:Crate = ground_spawner.spawn_crate()
 	crate.selected.connect(_on_crate_selected.bind(crate))
 	crate.caught.connect(_on_food_caught)
@@ -104,7 +110,17 @@ func add_crate() -> void:
 func _on_food_caught(food:Food):
 	if food.type.points > 0:
 		score += food.type.points
-		$GoodSound.play()
+		if food.type.collect_sounds.size() > 0:
+			var stream: AudioStream = food.type.collect_sounds.pick_random()
+			var audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
+			audio_player.stream = stream
+			audio_player.autoplay = true
+			audio_player.finished.connect(func():
+				audio_player.queue_free()
+				)
+			audio_player.add_to_group("sfx")
+			audio_player.volume_linear = GlobalData.settings_values["sfx_volume_linear"]
+			add_child(audio_player)
 	else:
 		strikes+=1
 
@@ -121,6 +137,10 @@ func _on_crate_selected(crate:Crate):
 	if upgrade_cost <= score and upgrade_cost >= 0:
 		crate.upgrade(current_upgrade_mode)
 		score -= upgrade_cost
+		if current_upgrade_mode == GlobalData.UpgradeMode.CRATE_SPEED:
+			$UpgradeCrateSpeedSFX.play()
+		elif current_upgrade_mode == GlobalData.UpgradeMode.CRATE_SIZE:
+			$UpgradeCrateSizeSFX.play()
 	ui.disable_all_upgrade_buttons()
 		
 

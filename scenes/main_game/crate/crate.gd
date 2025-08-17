@@ -64,17 +64,18 @@ func _physics_process(delta:float) -> void:
 		return
 	
 	var target:Vector3 = position
-	path.follower.progress += delta * speed
 	target = path.follower.global_position
-	path.update_line_display()
 	if position.distance_to(target) > 0.5:
 		velocity = position.direction_to(target) * speed
 	else:
 		velocity = Vector3.ZERO
+		path.follower.progress += delta * speed * 2
+		path.update_line_display()
 	move_and_slide()
-	#position = target
+
 	if not is_selected and is_equal_approx(path.follower.progress_ratio, 1.0):
 		path.queue_free()
+		
 
 func destroy() -> void:
 #	Maybe do another particle explosion here I donno

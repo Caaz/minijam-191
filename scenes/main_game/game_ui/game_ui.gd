@@ -38,27 +38,6 @@ func add_strike_display():
 	strike.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
 	strike_container.add_child(strike)
 
-#func _input(event: InputEvent) -> void:
-	#if game.current_upgrade_mode == GlobalData.UpgradeMode.NONE:
-		#return
-	#if event is InputEventMouseButton:
-		#if event.pressed:
-			#game.click_raycast_crates.position = game.camera.project_ray_origin(event.position)
-			#game.click_raycast_crates.target_position = game.camera.project_ray_normal(event.position) * 100
-			#game.click_raycast_crates.force_raycast_update()
-			#if not game.click_raycast_crates.is_colliding():
-				#disable_all_upgrade_buttons()
-				#return
-				#
-			#var collider = game.click_raycast_crates.get_collider()
-			#if collider is Area3D:
-				#var crate: Crate = collider.get_parent()
-				#var upgrade_cost = crate.get_upgrade_cost(game.current_upgrade_mode)
-				#if upgrade_cost <= game.score and upgrade_cost >= 0:
-					#crate.upgrade(game.current_upgrade_mode)
-					#game.score -= upgrade_cost
-					#disable_all_upgrade_buttons()
-
 func disable_all_upgrade_buttons() -> void:
 	upgrade_crate_size_button.button_pressed = false
 	upgrade_crate_speed_button.button_pressed = false
