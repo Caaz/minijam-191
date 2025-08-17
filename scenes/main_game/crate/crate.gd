@@ -1,4 +1,5 @@
-class_name Crate extends RigidBody3D
+class_name Crate extends CharacterBody3D
+
 signal selected()
 signal caught(food:Food)
 @export var PathScene:PackedScene
@@ -7,6 +8,11 @@ signal caught(food:Food)
 
 var path:Path
 var speed:float = 10
+
+var upgrade_levels: Dictionary = {GlobalData.UpgradeMode.CRATE_SPEED: 0, GlobalData.UpgradeMode.CRATE_SIZE: 0}
+var upgrade_properties: Dictionary = {GlobalData.UpgradeMode.CRATE_SPEED: "speed", GlobalData.UpgradeMode.CRATE_SIZE: "scale"}
+var upgrade_values: Dictionary = {GlobalData.UpgradeMode.CRATE_SPEED: [10, 20, 30, 40, 50], GlobalData.UpgradeMode.CRATE_SIZE: [Vector3(1,1,1), Vector3(1.2,1.2,1.2), Vector3(1.6,1.6,1.6), Vector3(2.0,2.0,2.0), Vector3(2.4,2.4,2.4)]}
+var upgrade_costs: Dictionary = {GlobalData.UpgradeMode.CRATE_SPEED: [0, 1, 2, 3, 4], GlobalData.UpgradeMode.CRATE_SIZE: [0, 1, 2, 3, 4]}
 
 var is_selected:bool = false:
 	set(new_selected):
@@ -28,13 +34,14 @@ func _ready() -> void:
 	)
 
 func get_upgrade_cost(upgrade_mode: GlobalData.UpgradeMode) -> int:
-	if upgrade_mode == GlobalData.UpgradeMode.CRATE_SPEED:
-		return 2
-	return 0
+	if upgrade_levels[upgrade_mode] + 1 < upgrade_costs[upgrade_mode].size():
+		return upgrade_costs[upgrade_mode][upgrade_levels[upgrade_mode] + 1]
+	return -1
 
 func upgrade(upgrade_mode: GlobalData.UpgradeMode):
-	if upgrade_mode == GlobalData.UpgradeMode.CRATE_SPEED:
-		speed += 5
+	if upgrade_levels[upgrade_mode] + 1 < upgrade_costs[upgrade_mode].size():
+		upgrade_levels[upgrade_mode] = upgrade_levels[upgrade_mode] + 1
+		set(upgrade_properties[upgrade_mode], upgrade_values[upgrade_mode][upgrade_levels[upgrade_mode]])
 	
 func _input_event(_camera: Camera3D, event: InputEvent, _event_position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event.is_action_pressed(&"select"):
@@ -57,6 +64,11 @@ func _physics_process(delta:float) -> void:
 	path.follower.progress += delta * speed
 	target = path.follower.global_position
 	path.update_line_display()
-	position = target
+	if position.distance_to(target) > 0.5:
+		velocity = position.direction_to(target) * speed
+	else:
+		velocity = Vector3.ZERO
+	move_and_slide()
+	#position = target
 	if not is_selected and is_equal_approx(path.follower.progress_ratio, 1.0):
 		path.queue_free()
