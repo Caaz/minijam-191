@@ -1,3 +1,3 @@
 extends Node
 
-enum CrateUpgrade {NONE, SPEED, SIZE}
+enum UpgradeMode {NONE, CRATE_SPEED, CRATE_SIZE}

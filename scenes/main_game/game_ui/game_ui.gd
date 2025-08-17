@@ -38,7 +38,7 @@ func add_strike_display():
 	strike_container.add_child(strike)
 
 func _input(event: InputEvent) -> void:
-	if game.current_upgrade_mode == GlobalData.CrateUpgrade.NONE:
+	if game.current_upgrade_mode == GlobalData.UpgradeMode.NONE:
 		return
 	if event is InputEventMouseButton:
 		if event.pressed:
@@ -56,6 +56,7 @@ func _input(event: InputEvent) -> void:
 				if upgrade_cost <= game.score:
 					crate.upgrade(game.current_upgrade_mode)
 					game.score -= upgrade_cost
+					game.current_upgrade_mode = GlobalData.UpgradeMode.NONE
 					game.process_mode = Node.PROCESS_MODE_INHERIT
 	pass
 	

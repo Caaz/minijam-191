@@ -17,10 +17,10 @@ const MAX_STRIKES:int = 3
 @export var custom_grid_map: CustomGridMap
 @export var stage_manager:StageManager
 
-var current_upgrade_mode: GlobalData.CrateUpgrade = GlobalData.CrateUpgrade.NONE:
+var current_upgrade_mode: GlobalData.UpgradeMode = GlobalData.UpgradeMode.NONE:
 	set(new_upgrade_mode):
 		current_upgrade_mode = new_upgrade_mode
-		if new_upgrade_mode == GlobalData.CrateUpgrade.NONE:
+		if new_upgrade_mode == GlobalData.UpgradeMode.NONE:
 			process_mode = Node.PROCESS_MODE_INHERIT
 		else:
 			process_mode = Node.PROCESS_MODE_DISABLED
@@ -64,7 +64,7 @@ func _ready() -> void:
 			add_crate()
 		)
 	ui.upgrade_crate_speed_button.pressed.connect(func():
-		current_upgrade_mode = GlobalData.CrateUpgrade.SPEED
+		current_upgrade_mode = GlobalData.UpgradeMode.CRATE_SPEED
 	)
 
 func _process(delta:float) -> void:
