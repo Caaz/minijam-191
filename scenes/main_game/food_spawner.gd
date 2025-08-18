@@ -41,17 +41,6 @@ func _spawn_food(gave_type: bool = false, gave_position: bool = false, given_typ
 	food.gravity_scale = stage_manager.stage.gravity_scale
 	
 	food.hit_floor.connect(func():
-		if food.type.impact_sound != null:
-			var stream: AudioStream = food.type.impact_sound
-			var audio_player: AudioStreamPlayer = AudioStreamPlayer.new()
-			audio_player.stream = stream
-			audio_player.autoplay = true
-			audio_player.finished.connect(func():
-				audio_player.queue_free()
-				)
-			audio_player.add_to_group("sfx")
-			audio_player.volume_linear = GlobalData.settings_values["sfx_volume_linear"]
-			add_child(audio_player)
 		if food.type.points > 0:
 			game.strikes += 1
 	)

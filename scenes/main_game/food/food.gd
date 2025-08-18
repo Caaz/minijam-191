@@ -6,6 +6,7 @@ signal hit_floor()
 @export var collision_shape:CollisionShape3D
 @export var drop_indicator:Sprite3D
 @export var explosion:GPUParticles3D
+@export var sfx:AudioStreamPlayer3D
 
 var sprite:Sprite3D
 var progress_circle:Sprite3D
@@ -21,6 +22,7 @@ func _ready() -> void:
 	drop_indicator.position = Vector3(global_position.x, 0.5, global_position.z)
 	drop_material = drop_indicator.material_override as ShaderMaterial
 	drop_material.set_shader_parameter('icon', type.icon)
+	sfx.volume_linear = GlobalData.settings_values["sfx_volume_linear"]
 
 func _physics_process(_delta) -> void:
 	# Update progress circle based on height
@@ -34,6 +36,8 @@ func _physics_process(_delta) -> void:
 			if type.splats:
 				queue_free()
 				hit_floor.emit()
+				sfx.stream = type.impact_sound
+				sfx.play()
 			elif drop_indicator:
 				drop_indicator.queue_free()
 		
@@ -42,6 +46,7 @@ func _physics_process(_delta) -> void:
 			explode()
 	
 func explode() -> void:
+	sfx.play()
 	explosion.emitting = true
 	mesh_instance.hide()
 	explosion.finished.connect(queue_free)
